@@ -2,8 +2,8 @@
 
 namespace xGrz\Dhl24UI\Http\Controllers;
 
-use xGrz\Dhl24\Http\Requests\StoreShipmentRequest;
 use xGrz\Dhl24\Models\DHLShipment;
+use xGrz\Dhl24UI\Http\Requests\StoreShipmentRequest;
 
 class ShipmentsController extends BaseController
 {

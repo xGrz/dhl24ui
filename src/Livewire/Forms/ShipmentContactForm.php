@@ -4,7 +4,7 @@ namespace xGrz\Dhl24UI\Livewire\Forms;
 
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use xGrz\Dhl24\Http\Requests\StoreShipmentRequest;
+use xGrz\Dhl24UI\Http\Requests\StoreShipmentRequest;
 
 class ShipmentContactForm extends Form
 {
