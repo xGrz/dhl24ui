@@ -1,0 +1,41 @@
+{
+    "name": "xgrz/dhl24ui",
+    "description": "DHL24 (PL) user interface",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "dhl24"
+    ],
+    "autoload": {
+        "psr-4": {
+            "xGrz\\Dhl24UI\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "xGrz\\Dhl24UI\\DHLUIServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Grzegorz Byśkiniewicz",
+            "email": "grzesiek.byskiniewicz@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "../../../vendor/laravel/framework": "^10.0",
+        "../../../vendor/xgrz/qbp": "dev-main",
+        "../../../vendor/livewire/livewire": "^3.0",
+        "../../../vendor/wire-elements/modal": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
