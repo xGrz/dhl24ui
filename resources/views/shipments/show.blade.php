@@ -104,62 +104,62 @@
         <x-p-paper>
             <x-slot:title>Details</x-slot:title>
             <div class="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-                <x-dhl::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Shipment date</x-slot:name>
                     <x-slot:value>{{ $shipment->shipment_date?->format('d-m-Y') }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Shipment type</x-slot:name>
                     <x-slot:value>{{ $shipment->product->name }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip class="md:col-span-2">
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip class="md:col-span-2">
                     <x-slot:name>Shipment content</x-slot:name>
                     <x-slot:value>{{ $shipment->content }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Cost center</x-slot:name>
                     <x-slot:value>{{ $shipment->cost_center?->name }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Reference</x-slot:name>
                     <x-slot:value>{{ $shipment->reference }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Return on delivery</x-slot:name>
                     <x-slot:value>{{ $shipment->return_on_delivery ? 'Yes' : false}}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Real cost</x-slot:name>
                     <x-slot:value>{{ $shipment->cost }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Proof of delivery</x-slot:name>
                     <x-slot:value>{{ $shipment->proof_of_delivery ? 'Yes' : false }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Self collect</x-slot:name>
                     <x-slot:value>{{ $shipment->self_collect ? 'Yes' : false }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>PDI</x-slot:name>
                     <x-slot:value>{{ $shipment->predelivery_information ? 'Yes' : false }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Pre aviso</x-slot:name>
                     <x-slot:value>{{ $shipment->preaviso? 'Yes' : false }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Payer</x-slot:name>
                     <x-slot:value>{{ $shipment->payer_type }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Courier booking id</x-slot:name>
                     <x-slot:value>{{ $shipment->courier_booking?->order_id }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
-                <x-dhl::shipment-detail-chip class="md:col-span-2 md:col-span-2 lg:col-span-4 xl:md-col-span-6">
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip class="md:col-span-2 md:col-span-2 lg:col-span-4 xl:md-col-span-6">
                     <x-slot:name>Comment</x-slot:name>
                     <x-slot:value class="!text-left">{{ $shipment->comment }}</x-slot:value>
-                </x-dhl::shipment-detail-chip>
+                </x-dhl-ui::shipment-detail-chip>
 
             </div>
         </x-p-paper>

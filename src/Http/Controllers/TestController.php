@@ -10,6 +10,7 @@ class TestController extends Controller
 {
     public function index()
     {
+        die('e');
         $faker = Faker\Factory::create('pl_PL');
 
         $wizard = new ShipmentWizard();

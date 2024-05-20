@@ -6,8 +6,6 @@ use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use xGrz\Dhl24\Facades\DHL24;
-use xGrz\Dhl24\Models\DHLContentSuggestion;
-use xGrz\Dhl24\Models\DHLCostCenter;
 
 class ShipmentServices extends Component
 {
@@ -62,28 +60,14 @@ class ShipmentServices extends Component
 
     private function getCostCenters(): void
     {
-        $this->costsCenter = DHLCostCenter::query()
-            ->select('name')
-            ->orderBy('is_default', 'desc')
-            ->orderBy('name')
-            ->get()
-            ->map(fn($costName) => $costName->name)
-            ->toArray();
+        $this->costsCenter = DHL24::getCostCenters();
         $this->costCenterName = $this->costsCenter[0] ?? '';
     }
 
     private function getContentSuggestions(): void
     {
-        $suggestions = DHLContentSuggestion::orderBy('name')->get();
-
-        $this->contentSuggestions = $suggestions
-            ->map(fn($contentSuggestion) => $contentSuggestion->name)
-            ->toArray();
-
-        $this->content = $suggestions
-            ->filter(fn($suggestion) => $suggestion->is_default)
-            ->first()
-            ?->name ?? '';
+        $this->contentSuggestions = DHL24::getContentSuggestions();
+        $this->content = $this->contentSuggestions[0] ?? '';
     }
 
 

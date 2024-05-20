@@ -8,19 +8,19 @@
                     <h2>Recipient address:</h2>
                     <div class="grid grid-cols-12 gap-x-4 gap-y-1 mx-2">
                         <div class="col-span-12">
-                            <x-dhl::input label="Recipient full name" model="recipient.name"/>
+                            <x-dhl-ui::input label="Recipient full name" model="recipient.name"/>
                         </div>
                         <div class="col-span-4">
-                            <x-dhl::input label="Postal code" model="recipient.postalCode"/>
+                            <x-dhl-ui::input label="Postal code" model="recipient.postalCode"/>
                         </div>
                         <div class="col-span-8">
-                            <x-dhl::input label="City" model="recipient.city"/>
+                            <x-dhl-ui::input label="City" model="recipient.city"/>
                         </div>
                         <div class="col-span-8">
-                            <x-dhl::input label="Street" model="recipient.street"/>
+                            <x-dhl-ui::input label="Street" model="recipient.street"/>
                         </div>
                         <div class="col-span-4">
-                            <x-dhl::input label="House number" model="recipient.houseNumber"/>
+                            <x-dhl-ui::input label="House number" model="recipient.houseNumber"/>
                         </div>
                     </div>
                 </div>
@@ -28,13 +28,13 @@
                     <h2>Contact</h2>
                     <div class="grid gap-x-4 gap-y-1 mx-2">
                         <div class="col-span-12">
-                            <x-dhl::input label="Contact name" model="contact.name" lazy/>
+                            <x-dhl-ui::input label="Contact name" model="contact.name" lazy/>
                         </div>
                         <div class="col-span-12">
-                            <x-dhl::input label="Contact email" model="contact.email" lazy/>
+                            <x-dhl-ui::input label="Contact email" model="contact.email" lazy/>
                         </div>
                         <div class="col-span-12">
-                            <x-dhl::input label="Contact phone" model="contact.phone" lazy/>
+                            <x-dhl-ui::input label="Contact phone" model="contact.phone" lazy/>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
             @if($items)
                 @foreach($items as $key => $item)
                     <div wire:key="items_{{$key}}">
-                        <x-dhl::shipment-item id="{{$key}}" :$shipmentTypes :$item/>
+                        <x-dhl-ui::shipment-item id="{{$key}}" :$shipmentTypes :$item/>
                     </div>
                 @endforeach
             @else
@@ -81,42 +81,42 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-4">
                 <div>
                     <x-p-input
-                        label="{{__('dhl::shipment.services.content')}}"
+                        label="{{__('dhl-ui::shipment.services.content')}}"
                         wire:model.live.debounce="services.content"
                         :suggestions="$services->contentSuggestions"
                     />
-                    <x-p-select label="{{__('dhl::shipment.services.costsCenter')}}"
+                    <x-p-select label="{{__('dhl-ui::shipment.services.costsCenter')}}"
                                 wire:model="services.costCenterName">
                         @foreach($services->costsCenter as $costCenterName)
                             <option value="{{$costCenterName}}">{{$costCenterName}}</option>
                         @endforeach
                     </x-p-select>
-                    <x-p-input label="{{__('dhl::shipment.services.comment')}}"
+                    <x-p-input label="{{__('dhl-ui::shipment.services.comment')}}"
                                wire:model.live.debounce="services.comment"/>
                 </div>
                 <div>
                     <x-p-input
-                        label="{{__('dhl::shipment.services.value')}}"
+                        label="{{__('dhl-ui::shipment.services.value')}}"
                         type="float"
                         wire:model.live.debounce="services.value"
                         class="text-right"
                     />
                     <x-p-input
-                        label="{{__('dhl::shipment.services.cod')}}"
+                        label="{{__('dhl-ui::shipment.services.cod')}}"
                         type="float"
                         wire:model.live.debounce="services.cod"
                         class="text-right"
                     />
                     <x-p-input
-                        label="{{__('dhl::shipment.services.reference')}}"
+                        label="{{__('dhl-ui::shipment.services.reference')}}"
                         wire:model.live="services.references"
                     />
                 </div>
                 <div>
                     <div class="text-sm">Usługi dodatkowe</div>
-                    <x-p-checkbox as-switch label="{{__('dhl::shipment.services.pdi') }}" wire:model.live="services.pdi"/>
-                    <x-p-checkbox as-switch label="{{__('dhl::shipment.services.rod')}}" wire:model.live="services.rod"/>
-                    <x-p-checkbox as-switch label="{{__('dhl::shipment.services.owl')}}" wire:model.live="services.owl"/>
+                    <x-p-checkbox as-switch label="{{__('dhl-ui::shipment.services.pdi') }}" wire:model.live="services.pdi"/>
+                    <x-p-checkbox as-switch label="{{__('dhl-ui::shipment.services.rod')}}" wire:model.live="services.rod"/>
+                    <x-p-checkbox as-switch label="{{__('dhl-ui::shipment.services.owl')}}" wire:model.live="services.owl"/>
                 </div>
             </div>
         </x-p-paper>
