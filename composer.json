@@ -1,6 +1,6 @@
 {
     "name": "xgrz/dhl24ui",
-    "description": "DHL24 (PL) user interface",
+    "description": "DHL24 (PL) UI",
     "license": "MIT",
     "keywords": [
         "laravel",
@@ -28,10 +28,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.2",
-        "../../../vendor/laravel/framework": "^10.0",
-        "../../../vendor/xgrz/qbp": "dev-main",
-        "../../../vendor/livewire/livewire": "^3.0",
-        "../../../vendor/wire-elements/modal": "^2.0"
+        "laravel/framework": "^10.0",
+        "xgrz/dhl24": "dev-main",
+        "xgrz/qbp": "dev-main",
+        "livewire/livewire": "^3.0",
+        "wire-elements/modal": "^2.0"
     },
     "config": {
         "allow-plugins": {
