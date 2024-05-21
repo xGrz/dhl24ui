@@ -10,14 +10,15 @@
         @if($shipments)
             <x-p-table>
                 <x-p-thead>
-                    <x-p-tr>
-                        <x-p-th>Shipment number</x-p-th>
+                    <x-p-tr left>
+                        <x-p-th>Number</x-p-th>
+                        <x-p-th>State</x-p-th>
                         <x-p-th>Sender</x-p-th>
                         <x-p-th>Receiver</x-p-th>
-                        <x-p-th>Items</x-p-th>
-                        <x-p-th>COD</x-p-th>
-                        <x-p-th>Cost</x-p-th>
-                        <x-p-th>Options</x-p-th>
+                        <x-p-th center>Items</x-p-th>
+                        <x-p-th right>COD</x-p-th>
+                        <x-p-th center>Cost</x-p-th>
+                        <x-p-th right>Options</x-p-th>
                     </x-p-tr>
                 </x-p-thead>
                 <x-p-tbody>
@@ -27,6 +28,9 @@
                                 <x-p-link href="{{route('dhl24.shipments.show', $shipment->id)}}">
                                     {{ $shipment->number }}
                                 </x-p-link>
+                            </x-p-td>
+                            <x-p-td>
+                                <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
                             </x-p-td>
                             <x-p-td>
                                 {{ $shipment->shipper_name }}
@@ -45,7 +49,8 @@
                                 <x-p-button href="{{ route('dhl24.shipments.label', $shipment->id) }}" size="small">
                                     Label
                                 </x-p-button>
-                                <x-p-button href="{{ route('dhl24.shipments.destroy', $shipment->id) }}" size="small" color="danger">
+                                <x-p-button href="{{ route('dhl24.shipments.destroy', $shipment->id) }}" size="small"
+                                            color="danger">
                                     Delete
                                 </x-p-button>
                             </x-p-td>

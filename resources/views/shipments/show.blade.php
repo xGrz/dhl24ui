@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="grid gap-2">
-        {{$shipment->tracking->first()?->type?->getState()}}
+        <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
         <div class="text-right">
             <x-p-button href="{{route('dhl24.shipments.label', $shipment->id)}}">
                 Label
@@ -170,11 +170,13 @@
                     @foreach($shipment->tracking as $event)
                         <li class="mb-4 ms-4">
                             <div
-                                class="absolute w-3 h-3 bg-red-800 rounded-full mt-1.5 -start-1.5 border border-white"></div>
+                                class="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-white {{ str($event->type->getStateColor())->replace('text', 'bg') }}"></div>
                             <time
-                                class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{$event->pivot->event_timestamp}}</time>
-                            <div class="text-lg font-semibold text-white">{{$event->getDescription()}}</div>
-                            <p>{{'@'}}{{$event->pivot->terminal}}</p>
+                                class="mb-1 text-sm font-normal leading-none text-gray-500">{{$event->pivot->event_timestamp}}</time>
+                            <div class="text-lg font-semibold {{$event->type->getStateColor()}}">{{$event->getDescription()}}</div>
+                            <p>
+                                @if($event->pivot->terminal){{'@'}}{{$event->pivot->terminal}}@endif
+                            </p>
                         </li>
                     @endforeach
                 </ol>
