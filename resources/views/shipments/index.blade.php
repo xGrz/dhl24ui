@@ -26,9 +26,11 @@
                         <x-p-tr>
                             <x-p-td>
                                 <x-p-link href="{{route('dhl24.shipments.show', $shipment->id)}}">
-                                    {{ $shipment->number }}<br/>
-                                    {{ $shipment->shipment_date->format('d-m-Y') }}
+                                    {{ $shipment->number }}
                                 </x-p-link>
+                                <span class="block text-sm">
+                                {{ $shipment->shipment_date->format('d-m-Y') }}
+                                </span>
                             </x-p-td>
                             <x-p-td>
                                 <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
@@ -47,7 +49,8 @@
                                 <div class="text-xs">{{ $shipment->cost_center?->name }}</div>
                             </x-p-td>
                             <x-p-td right>
-                                <x-p-button href="{{route('dhl24.shipments.cost', $shipment->id)}}" size="small" color="success">
+                                <x-p-button href="{{route('dhl24.shipments.cost', $shipment->id)}}" size="small"
+                                            color="success">
                                     Cost
                                 </x-p-button>
                                 <x-p-button href="{{ route('dhl24.shipments.label', $shipment->id) }}" size="small">
