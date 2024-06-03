@@ -5,6 +5,7 @@ namespace xGrz\Dhl24UI\Livewire\Settings\CostsCenter;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
+use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLCostCenter;
 
 class CostCenterEdit extends ModalComponent
@@ -30,6 +31,7 @@ class CostCenterEdit extends ModalComponent
     public function update(): void
     {
         $this->validate();
+        DHL24::costsCenter($this->costCenter)->rename($this->name);
         $this->costCenter->update([
             'name' => $this->name,
         ]);

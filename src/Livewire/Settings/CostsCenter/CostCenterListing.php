@@ -5,7 +5,6 @@ namespace xGrz\Dhl24UI\Livewire\Settings\CostsCenter;
 use Illuminate\View\View;
 use Livewire\Component;
 use xGrz\Dhl24\Facades\DHL24;
-use xGrz\Dhl24\Models\DHLCostCenter;
 
 class CostCenterListing extends Component
 {
@@ -13,7 +12,7 @@ class CostCenterListing extends Component
 
     public function mount(): void
     {
-        $this->costCenters = DHL24::costsCenter(false);
+        $this->costCenters = DHL24::costsCenter()->query()->get();
     }
 
     public function render(): View
@@ -23,7 +22,7 @@ class CostCenterListing extends Component
 
     public function delete($itemId): void
     {
-        DHLCostCenter::destroy($itemId);
+        DHL24::costsCenter($itemId)->delete();
         $name = $this->costCenters->find($itemId)->name;
         session()->flash('success', "Cost center $name has been deleted.");
         $this->redirectRoute('dhl24.settings.costCenters.index');
@@ -31,7 +30,7 @@ class CostCenterListing extends Component
 
     public function setAsDefault($itemId): void
     {
-        $this->costCenters->find($itemId)->update(['is_default' => true]);
+        DHL24::costsCenter($itemId)->setDefault();
         $name = $this->costCenters->find($itemId)->name;
         session()->flash('info', "Default cost center has been changed to $name.");
         $this->redirectRoute('dhl24.settings.costCenters.index');

@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use LivewireUI\Modal\ModalComponent;
-use xGrz\Dhl24\Models\DHLCostCenter;
+use xGrz\Dhl24\Facades\DHL24;
 
 class CostCenterCreate extends ModalComponent
 {
@@ -21,7 +21,7 @@ class CostCenterCreate extends ModalComponent
     public function store(): void
     {
         $this->validate();
-        DHLCostCenter::create(['name' => $this->name]);
+        DHL24::costsCenter()->add($this->name);
         $this->closeModal();
         session()->flash('success', 'Cost Center has been created successfully.');
         $this->redirectRoute('dhl24.settings.costCenters.index');
