@@ -13,7 +13,7 @@ class ContentsListing extends Component
 
     public function mount(): void
     {
-        $this->contents = DHL24::contentSuggestions()->query()->get();
+        $this->contents = DHL24::contentSuggestions()->query()->sortedByNames()->get();
     }
 
     public function render(): View

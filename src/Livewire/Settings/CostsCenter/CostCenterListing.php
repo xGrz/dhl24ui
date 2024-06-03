@@ -12,7 +12,7 @@ class CostCenterListing extends Component
 
     public function mount(): void
     {
-        $this->costCenters = DHL24::costsCenter()->query()->get();
+        $this->costCenters = DHL24::costsCenter()->query()->sortedByNames()->get();
     }
 
     public function render(): View
