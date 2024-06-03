@@ -4,6 +4,7 @@ namespace xGrz\Dhl24UI\Livewire\Settings\CostsCenter;
 
 use Illuminate\View\View;
 use Livewire\Component;
+use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLCostCenter;
 
 class CostCenterListing extends Component
@@ -12,7 +13,7 @@ class CostCenterListing extends Component
 
     public function mount(): void
     {
-        $this->costCenters = DHLCostCenter::orderBy('name')->get();
+        $this->costCenters = DHL24::costsCenter(false);
     }
 
     public function render(): View

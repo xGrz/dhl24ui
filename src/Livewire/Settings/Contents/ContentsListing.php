@@ -4,7 +4,7 @@ namespace xGrz\Dhl24UI\Livewire\Settings\Contents;
 
 use Illuminate\View\View;
 use Livewire\Component;
-use xGrz\Dhl24\Models\DHLContentSuggestion;
+use xGrz\Dhl24\Facades\DHL24;
 
 class ContentsListing extends Component
 {
@@ -13,7 +13,7 @@ class ContentsListing extends Component
 
     public function mount(): void
     {
-        $this->contents = DHLContentSuggestion::orderBy('name')->get();
+        $this->contents = DHL24::contentSuggestions()->query()->get();
     }
 
     public function render(): View
@@ -23,14 +23,14 @@ class ContentsListing extends Component
 
     public function setAsDefault(int $itemId): void
     {
-        $this->contents->find($itemId)->update(['is_default' => true]);
+        DHL24::contentSuggestions($itemId)->setDefault();
         session()->flash('success', 'Default content has been set.');
         $this->redirectRoute('dhl24.settings.contents.index');
     }
 
     public function removeDefault(int $itemId): void
     {
-        $this->contents->find($itemId)->update(['is_default' => false]);
+        DHL24::contentSuggestions($itemId)->removeDefault();
         session()->flash('info', 'Default content has been removed.');
         $this->redirectRoute('dhl24.settings.contents.index');
     }

@@ -1,6 +1,7 @@
 <?php
 
 
+use xGrz\Dhl24UI\Http\Controllers\CostController;
 use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
 use xGrz\Dhl24UI\Http\Controllers\LabelController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
@@ -13,10 +14,10 @@ Route::middleware(['web'])
     ->prefix('dhl')
     ->name('dhl24.')
     ->group(function () {
-        Route::get('/', function () {
-            return to_route('dhl24.shipments.index');
-        });
+        Route::get('/', fn() => to_route('dhl24.shipments.index')); // redirect only
+
         Route::get('/shipments/{shipment}/label', LabelController::class)->name('shipments.label');
+        Route::get('/shipments/{shipment}/cost', CostController::class)->name('shipments.cost');
         Route::resource('/shipments', ShipmentsController::class);
         Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')

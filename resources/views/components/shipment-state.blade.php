@@ -1,3 +1,5 @@
-<span class="text-sm rounded {{ $status->type->getStateColor() }}">
+@if($status)
+    <span class="text-sm rounded {{ $status->type->getStateColor() }}">
         {{ $status->type->getLabel() }}
-</span>
+    </span>
+@endif

@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use LivewireUI\Modal\ModalComponent;
-use xGrz\Dhl24\Models\DHLContentSuggestion;
+use xGrz\Dhl24\Facades\DHL24;
 
 class ContentCreate extends ModalComponent
 {
@@ -22,7 +22,7 @@ class ContentCreate extends ModalComponent
     {
         $this->validate();
         $this->closeModal();
-        DHLContentSuggestion::create(['name' => $this->name]);
+        DHL24::contentSuggestions()->add($this->name);
         session()->flash('success', 'Content suggestion has been added successfully.');
         $this->redirectRoute('dhl24.settings.contents.index');
 

@@ -4,6 +4,7 @@ namespace xGrz\Dhl24UI\Livewire\Settings\Contents;
 
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
+use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLContentSuggestion;
 
 class ContentDelete extends ModalComponent
@@ -24,7 +25,7 @@ class ContentDelete extends ModalComponent
     public function deleteConfirmed(): void
     {
         $this->closeModal();
-        $this->content->delete();
+        DHL24::contentSuggestions($this->content)->delete();
         session()->flash('success', 'Content suggestion has been deleted.');
         $this->redirectRoute('dhl24.settings.contents.index');
     }

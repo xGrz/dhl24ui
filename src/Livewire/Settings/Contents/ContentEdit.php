@@ -5,6 +5,7 @@ namespace xGrz\Dhl24UI\Livewire\Settings\Contents;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
+use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLContentSuggestion;
 
 class ContentEdit extends ModalComponent
@@ -28,9 +29,7 @@ class ContentEdit extends ModalComponent
     {
         $this->validate();
         $this->closeModal();
-        $this->content->update([
-            'name' => $this->name,
-        ]);
+        DHL24::contentSuggestions($this->content)->rename($this->name);
         session()->flash('success', 'Suggestion has been updated.');
         $this->redirectRoute('dhl24.settings.contents.index');
     }

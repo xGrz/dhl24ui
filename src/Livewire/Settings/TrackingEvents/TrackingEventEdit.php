@@ -5,7 +5,7 @@ namespace xGrz\Dhl24UI\Livewire\Settings\TrackingEvents;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use LivewireUI\Modal\ModalComponent;
-use xGrz\Dhl24\Enums\StatusType;
+use xGrz\Dhl24\Enums\DHLStatusType;
 use xGrz\Dhl24\Models\DHLStatus;
 
 class TrackingEventEdit extends ModalComponent
@@ -20,7 +20,7 @@ class TrackingEventEdit extends ModalComponent
 
     public function mount(DHLStatus $event): void
     {
-        $this->types = StatusType::getOptions();
+        $this->types = DHLStatusType::getOptions();
         $this->type = $event->type;
         $this->event = $event;
         $this->description = $event->description;

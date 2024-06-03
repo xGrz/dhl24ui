@@ -4,7 +4,6 @@ namespace xGrz\Dhl24UI\Http\Controllers;
 
 use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLShipment;
-use xGrz\Dhl24UI\Http\Requests\StoreShipmentRequest;
 
 class ShipmentsController extends BaseController
 {
@@ -12,29 +11,29 @@ class ShipmentsController extends BaseController
     {
         return view('dhl-ui::shipments.index', [
             'title' => 'Shipments',
-            'shipments' => DHLShipment::withDetails()->latest()->paginate()
+            'shipments' => DHL24::shipments()->orderByDesc('shipment_date')->orderByDesc('number')->paginate()
         ]);
     }
 
-    public function create()
-    {
-        return view('dhl-ui::shipments.create', [
-            'title' => 'Crete shipment',
-        ]);
-    }
+//    public function create()
+//    {
+//        return view('dhl-ui::shipments.create', [
+//            'title' => 'Crete shipment',
+//        ]);
+//    }
 
     public function show(DHLShipment $shipment)
     {
-        $shipment = DHL24::getShipment($shipment->id);
+        $shipment = DHL24::shipment($shipment);
         return view('dhl-ui::shipments.show', [
             'title' => 'Shipment',
             'shipment' => $shipment
         ]);
     }
 
-    public function store(StoreShipmentRequest $request)
-    {
-        dd($request->all());
-    }
+//    public function store(StoreShipmentRequest $request)
+//    {
+//        dd($request->all());
+//    }
 
 }

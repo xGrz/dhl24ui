@@ -4,6 +4,9 @@
     <div class="grid gap-2">
         <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
         <div class="text-right">
+            <x-p-button href="{{route('dhl24.shipments.cost', $shipment->id)}}">
+                Cost
+            </x-p-button>
             <x-p-button href="{{route('dhl24.shipments.label', $shipment->id)}}">
                 Label
             </x-p-button>

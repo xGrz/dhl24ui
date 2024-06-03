@@ -5,7 +5,7 @@ namespace xGrz\Dhl24UI\Livewire;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use xGrz\Dhl24\Enums\ShipmentItemType;
+use xGrz\Dhl24\Enums\DHLShipmentItemType;
 
 class ShipmentListItem extends Component
 {
@@ -43,7 +43,7 @@ class ShipmentListItem extends Component
     public function render(): View
     {
         return view('dhl-ui::livewire.shipment-list-item', [
-            'shipmentTypes' => ShipmentItemType::cases()
+            'shipmentTypes' => DHLShipmentItemType::cases()
         ]);
     }
 
@@ -54,7 +54,7 @@ class ShipmentListItem extends Component
 
     public function updatingType($shipmentTypeName): void
     {
-        $shipmentType = ShipmentItemType::findByName($shipmentTypeName);
+        $shipmentType = DHLShipmentItemType::findByName($shipmentTypeName);
         $this->reset();
         $this->type = $shipmentType->name;
 
@@ -84,7 +84,7 @@ class ShipmentListItem extends Component
 
     private function setValue(string $prop, mixed $defaultValue): static
     {
-        $shipmentAttributes = ShipmentItemType::findByName($this->type)->getAttributes();
+        $shipmentAttributes = DHLShipmentItemType::findByName($this->type)->getAttributes();
         $this->$prop = in_array($prop, $shipmentAttributes)
             ? $defaultValue
             : null;

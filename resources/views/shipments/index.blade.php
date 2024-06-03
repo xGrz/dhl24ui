@@ -26,7 +26,8 @@
                         <x-p-tr>
                             <x-p-td>
                                 <x-p-link href="{{route('dhl24.shipments.show', $shipment->id)}}">
-                                    {{ $shipment->number }}
+                                    {{ $shipment->number }}<br/>
+                                    {{ $shipment->shipment_date->format('d-m-Y') }}
                                 </x-p-link>
                             </x-p-td>
                             <x-p-td>
@@ -46,6 +47,9 @@
                                 <div class="text-xs">{{ $shipment->cost_center?->name }}</div>
                             </x-p-td>
                             <x-p-td right>
+                                <x-p-button href="{{route('dhl24.shipments.cost', $shipment->id)}}" size="small" color="success">
+                                    Cost
+                                </x-p-button>
                                 <x-p-button href="{{ route('dhl24.shipments.label', $shipment->id) }}" size="small">
                                     Label
                                 </x-p-button>
@@ -67,5 +71,4 @@
         @endif
 
     </x-p-paper>
-    <x-p-pagination :source="$shipments"/>
 @endsection
