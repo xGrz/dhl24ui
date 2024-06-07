@@ -1,6 +1,6 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire\Settings\TrackingEvents;
+namespace xGrz\Dhl24UI\Livewire\Settings\TrackingStates;
 
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
@@ -8,7 +8,7 @@ use LivewireUI\Modal\ModalComponent;
 use xGrz\Dhl24\Enums\DHLStatusType;
 use xGrz\Dhl24\Models\DHLTrackingState;
 
-class TrackingEventEdit extends ModalComponent
+class TrackingStateEdit extends ModalComponent
 {
     public DHLTrackingState $event;
     public $types = [];
@@ -28,7 +28,7 @@ class TrackingEventEdit extends ModalComponent
     }
     public function render(): View
     {
-        return view('dhl-ui::settings.livewire.tracking-events.tracking-event-edit',[
+        return view('dhl-ui::settings.livewire.tracking-states.tracking-state-edit',[
             'title' => 'Edit event description',
         ]);
     }
@@ -50,7 +50,7 @@ class TrackingEventEdit extends ModalComponent
         ]);
         $this->closeModal();
         session()->flash('success', 'Tracking event successfully updated.');
-        $this->redirectRoute('dhl24.settings.tracking-events.index');
+        $this->redirectRoute('dhl24.settings.tracking-states.index');
     }
 
 }

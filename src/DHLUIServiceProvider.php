@@ -14,8 +14,8 @@ use xGrz\Dhl24UI\Livewire\Settings\CostsCenter\CostCenterCreate;
 use xGrz\Dhl24UI\Livewire\Settings\CostsCenter\CostCenterDelete;
 use xGrz\Dhl24UI\Livewire\Settings\CostsCenter\CostCenterEdit;
 use xGrz\Dhl24UI\Livewire\Settings\CostsCenter\CostCenterListing;
-use xGrz\Dhl24UI\Livewire\Settings\TrackingEvents\TrackingEventEdit;
-use xGrz\Dhl24UI\Livewire\Settings\TrackingEvents\TrackingEventListing;
+use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateEdit;
+use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListItem;
 use xGrz\Dhl24UI\Livewire\ShipmentServices;
 
@@ -41,8 +41,8 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('content-create', ContentCreate::class);
         Livewire::component('content-edit', ContentEdit::class);
         Livewire::component('content-delete', ContentDelete::class);
-        Livewire::component('tracking-events-listing', TrackingEventListing::class);
-        Livewire::component('tracking-event-edit', TrackingEventEdit::class);
+        Livewire::component('tracking-states-listing', TrackingStateListing::class);
+        Livewire::component('tracking-event-edit', TrackingStateEdit::class);
 
     }
 

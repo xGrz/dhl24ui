@@ -17,7 +17,7 @@
             <x-p::icons.settings class="w-5 h-5"/>
             TODO: Shipment diamentions defaults
         </a>
-        <a href="{{ route('dhl24.settings.tracking-events.index') }}"
+        <a href="{{ route('dhl24.settings.tracking-states.index') }}"
            class="flex gap-2 items-center p-4 bg-slate-800 hover:bg-slate-700 hover:text-slate-100 transition-all cursor-pointer">
             <x-p::icons.settings class="w-5 h-5"/>
             Tracking status configuration

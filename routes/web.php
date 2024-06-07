@@ -26,7 +26,7 @@ Route::middleware(['web'])
                 Route::get('/', SettingsController::class)->name('index');
                 Route::get('/costCenters', SettingsCostCentersController::class)->name('costCenters.index');
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
-                Route::get('/tracking-events',SettingsTrackingEventsController::class)->name('tracking-events.index');
+                Route::get('/tracking-states',SettingsTrackingEventsController::class)->name('tracking-states.index');
             });
     });
 

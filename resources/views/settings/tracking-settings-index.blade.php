@@ -1,5 +1,5 @@
 @extends('p::app')
 
 @section('content')
-    @livewire('tracking-events-listing')
+    @livewire('tracking-states-listing')
 @endsection
