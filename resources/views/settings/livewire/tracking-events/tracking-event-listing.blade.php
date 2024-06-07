@@ -13,12 +13,12 @@
             <x-p-tbody>
                 @foreach($events as $event)
                     <x-p-tr>
-                        <x-p-td>{{$event->symbol}}</x-p-td>
-                        <x-p-td>{{$event->custom_description ?? $event->description}}</x-p-td>
+                        <x-p-td class="font-bold text-sm {{$event->type?->getStateColor()}}">{{$event->code}}</x-p-td>
+                        <x-p-td class="text-sm">{{$event->label}}</x-p-td>
                         <x-p-td>{{$event->type->getLabel()}}</x-p-td>
                         <x-p-td right>
                             <x-p-button
-                                wire:click="$dispatch('openModal', { component: 'tracking-event-edit', arguments: { event: '{{$event->symbol}}' }}) " size="small"
+                                wire:click="$dispatch('openModal', { component: 'tracking-event-edit', arguments: { event: '{{$event->code}}' }}) " size="small"
                             >
                                 Edit
                             </x-p-button>

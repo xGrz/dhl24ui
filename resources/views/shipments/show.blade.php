@@ -176,9 +176,12 @@
                                 class="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-white {{ str($event->type->getStateColor())->replace('text', 'bg') }}"></div>
                             <time
                                 class="mb-1 text-sm font-normal leading-none text-gray-500">{{$event->pivot->event_timestamp}}</time>
-                            <div class="text-lg font-semibold {{$event->type->getStateColor()}}">{{$event->getDescription()}}</div>
+                            <div
+                                class="text-lg font-semibold {{$event->type->getStateColor()}}">{{$event->label}}</div>
                             <p>
-                                @if($event->pivot->terminal){{'@'}}{{$event->pivot->terminal}}@endif
+                                @if($event->pivot->terminal)
+                                    {{'@'}}{{$event->pivot->terminal}}
+                                @endif
                             </p>
                         </li>
                     @endforeach

@@ -6,25 +6,25 @@ use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use LivewireUI\Modal\ModalComponent;
 use xGrz\Dhl24\Enums\DHLStatusType;
-use xGrz\Dhl24\Models\DHLStatus;
+use xGrz\Dhl24\Models\DHLTrackingState;
 
 class TrackingEventEdit extends ModalComponent
 {
-    public DHLStatus $event;
+    public DHLTrackingState $event;
     public $types = [];
 
-    public $description = '';
     #[Validate]
-    public $custom_description = '';
+    public $description = '';
+    public $system_description = '';
     public $type;
 
-    public function mount(DHLStatus $event): void
+    public function mount(DHLTrackingState $event): void
     {
         $this->types = DHLStatusType::getOptions();
         $this->type = $event->type;
         $this->event = $event;
+        $this->system_description = $event->system_description;
         $this->description = $event->description;
-        $this->custom_description = $event->custom_description;
     }
     public function render(): View
     {
@@ -36,7 +36,7 @@ class TrackingEventEdit extends ModalComponent
     public function rules(): array
     {
         return [
-            'custom_description' => 'string',
+            'description' => 'string',
             'type' => 'required'
         ];
     }
@@ -45,7 +45,7 @@ class TrackingEventEdit extends ModalComponent
     {
         $this->validate();
         $this->event->update([
-            'custom_description' => $this->custom_description,
+            'description' => $this->description,
             'type' => $this->type
         ]);
         $this->closeModal();
