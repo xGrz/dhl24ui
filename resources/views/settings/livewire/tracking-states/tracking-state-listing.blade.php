@@ -1,6 +1,6 @@
 <div>
     <x-p-paper>
-        <x-slot:title>Tracking events</x-slot:title>
+        <x-slot:title>Events states</x-slot:title>
         <x-p-table>
             <x-p-thead>
                 <x-p-tr left>

@@ -7,7 +7,7 @@ use xGrz\Dhl24UI\Http\Controllers\LabelController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsCostCentersController;
-use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingEventsController;
+use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
 use xGrz\Dhl24UI\Http\Controllers\ShipmentsController;
 
 Route::middleware(['web'])
@@ -26,7 +26,7 @@ Route::middleware(['web'])
                 Route::get('/', SettingsController::class)->name('index');
                 Route::get('/costCenters', SettingsCostCentersController::class)->name('costCenters.index');
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
-                Route::get('/tracking-states',SettingsTrackingEventsController::class)->name('tracking-states.index');
+                Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
     });
 
