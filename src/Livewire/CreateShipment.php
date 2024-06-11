@@ -8,9 +8,9 @@ use Livewire\Component;
 use xGrz\Dhl24\Enums\DHLAddressType;
 use xGrz\Dhl24\Enums\DHLDomesticShipmentType;
 use xGrz\Dhl24\Enums\DHLShipmentItemType;
-use xGrz\Dhl24\Helpers\Money;
-use xGrz\Dhl24\Models\DHLShipmentType;
-use xGrz\Dhl24\Wizard\ShipmentWizard;
+use xGrz\Dhl24\Exceptions\DHL24Exception;
+use xGrz\Dhl24\Wizard\DHLShipmentWizard;
+use xGrz\Dhl24UI\Helpers\Money;
 use xGrz\Dhl24UI\Http\Requests\StoreShipmentRequest;
 use xGrz\Dhl24UI\Livewire\Forms\ShipmentContactForm;
 use xGrz\Dhl24UI\Livewire\Forms\ShipmentRecipientForm;
@@ -47,37 +47,35 @@ class CreateShipment extends Component
         ]);
     }
 
-    public function createPackage(): void
+    public function createPackage()
     {
         $this->validate();
-        $wizard = new ShipmentWizard();
+        $wizard = new DHLShipmentWizard();
         $wizard
-            ->setShipperName('BRAMSTAL')
-            ->setShipperPostalCode('03986')
-            ->setShipperCity('Warszawa')
-            ->setShipperStreet('Sęczkowa')
-            ->setShipperHouseNumber('96A')
-            ->setShipperContactPerson('Grzesiek Testowski')
-            ->setShipperContactEmail('sender@example.com')
-            ->setShipperContactPhone('500600700')
-            ->setReceiverName('ACME Corp')
-            ->setReceiverType(DHLAddressType::BUSINESS)
-            ->setReceiverPostalCode('02777')
-            ->setReceiverCity('Kraków')
-            ->setReceiverStreet('Karmelikowa')
-            ->setReceiverHouseNumber('20')
-            ->setReceiverContactPerson('Jarek Kowalik')
-            ->setReceiverContactEmail('receiver@example.com')
-            ->setReceiverContactPhone('800900100')
-            ->setShipmentType(DHLDomesticShipmentType::from($this->services->deliveryService))
-            ->setCollectOnDelivery($this->services->getCod(), $this->services->reference)
-            ->setShipmentValue($this->services->getValue())
-            ->setContent($this->services->content)
-            //->loadCostCenter($this->services->costsCenter)
-        ;
+            ->shipperName('BRAMSTAL')
+            ->shipperPostalCode('03986')
+            ->shipperCity('Warszawa')
+            ->shipperStreet('Sęczkowa')
+            ->shipperHouseNumber('96A')
+            ->shipperContactPerson('Grzesiek Testowski')
+            ->shipperContactEmail('sender@example.com')
+            ->shipperContactPhone('500600700')
+            ->receiverName($this->recipient->name)
+            ->receiverType(DHLAddressType::BUSINESS)
+            ->receiverPostalCode($this->recipient->postalCode)
+            ->receiverCity($this->recipient->city)
+            ->receiverStreet($this->recipient->street)
+            ->receiverHouseNumber($this->recipient->houseNumber)
+            ->receiverContactPerson($this->contact->name)
+            ->receiverContactEmail($this->contact->email)
+            ->receiverContactPhone($this->contact->phone)
+            ->shipmentType(DHLDomesticShipmentType::from($this->services->deliveryService))
+            ->collectOnDelivery($this->services->getCod(), $this->services->reference)
+            ->shipmentValue($this->services->getValue())
+            ->content($this->services->content);
 
         foreach ($this->items as $item) {
-            $wizard->setItem(
+            $wizard->addItem(
                 DHLShipmentItemType::findByName($item['type']),
                 $item['quantity'],
                 $item['weight'] ?? null,
@@ -88,54 +86,17 @@ class CreateShipment extends Component
             );
         }
 
-        dd($wizard->create());
-//        $wizard = new ShipmentWizard(DHLDomesticShipmentType::DOMESTIC);
-//        $wizard->shipper()
-//            ->setName('BRAMSTAL')
-//            ->setStreet('Sęczkowa')
-//            ->setHouseNumber('96')
-//            ->setPostalCode('03986')
-//            ->setCity('Warszawa')
-//            ->setContactEmail('biuro@bramstal.pl')
-//            ->setContactPhone('501335555');
-//        $wizard->receiver()
-//            ->setName($this->recipient->name)
-//            ->setStreet($this->recipient->street)
-//            ->setHouseNumber($this->recipient->houseNumber)
-//            ->setPostalCode($this->recipient->postalCode)
-//            ->setCity($this->recipient->city)
-//            ->setContactEmail($this->contact->email ?? null)
-//            ->setContactPhone($this->contact->phone ?? null);
-//
-//        foreach ($this->items as $item) {
-//            $wizard
-//                ->addItem(DHLShipmentItemType::findByName(
-//                    $item['type']),
-//                    $item['quantity'],
-//                    $item['width'],
-//                    $item['height'],
-//                    $item['length'],
-//                    $item['weight']
-//                );
-//
-//        }
-//        $wizard->services()
-//            ->shipmentType(DHLDomesticShipmentType::tryFrom($this->services->deliveryService))
-//            ->collectOnDelivery( $this->services->getCod())
-//            ->selfCollect($this->services->owl)
-//            ->setInsurance( $this->services->getValue())
-//            ->setPreDeliveryInformation($this->services->pdi)
-//            ->returnOnDelivery($this->services->rod);
-//
-//        $wizard->content($this->services->content);
-//        $wizard->shipmentDate(now()->addDays(3));
-//
-//        try {
-//            DHL24::createShipment($wizard);
-//            $wizard->getModel()->fill(['shipment_id' => 2103821])->save();
-//        } catch (\Exception $exception) {
-//            dd($exception->getMessage());
-//        }
+
+        try {
+            $shipmentId = $wizard->create();
+            session()->flash('success', 'Shipment created [' . $shipmentId . ']');
+            return redirect(route('dhl24.shipments.index'));
+        } catch (DHL24Exception $e) {
+            $this->dispatch('openModal', component: 'shipment-create-error', arguments: [
+                'message' => $e->getMessage()
+            ]);
+            $this->dispatch('$reload');
+        }
 
     }
 

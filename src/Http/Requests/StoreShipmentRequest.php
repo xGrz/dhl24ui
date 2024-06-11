@@ -29,6 +29,7 @@ class StoreShipmentRequest extends FormRequest
             'items.*.width' => ['nullable', 'integer', 'min:1', 'max:1000'],
             'items.*.height' => ['nullable', 'integer', 'min:1', 'max:1000'],
             'items.*.nonStandard' => ['nullable', 'boolean'],
+
         ];
     }
 

@@ -16,6 +16,7 @@ use xGrz\Dhl24UI\Livewire\Settings\CostsCenter\CostCenterEdit;
 use xGrz\Dhl24UI\Livewire\Settings\CostsCenter\CostCenterListing;
 use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateEdit;
 use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateListing;
+use xGrz\Dhl24UI\Livewire\ShipmentCreateError;
 use xGrz\Dhl24UI\Livewire\ShipmentListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListItem;
 use xGrz\Dhl24UI\Livewire\ShipmentServices;
@@ -30,8 +31,10 @@ class DHLUIServiceProvider extends ServiceProvider
     public function boot(): void
     {
         self::setupWebRouting();
+        self::setupTranslations();
 
         Livewire::component('create-shipment', CreateShipment::class);
+        Livewire::component('shipment-create-error', ShipmentCreateError::class);
         Livewire::component('shipment-listing', ShipmentListing::class);
         Livewire::component('shipment-item', ShipmentListItem::class);
         Livewire::component('shipment-services', ShipmentServices::class);
@@ -52,6 +55,11 @@ class DHLUIServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dhl-ui');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+    }
+
+    private function setupTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'dhl-ui');
     }
 
 }

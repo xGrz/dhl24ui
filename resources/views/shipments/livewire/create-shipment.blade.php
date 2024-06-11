@@ -109,7 +109,7 @@
                     />
                     <x-p-input
                         label="{{__('dhl-ui::shipment.services.reference')}}"
-                        wire:model.live="services.references"
+                        wire:model.live="services.reference"
                     />
                 </div>
                 <div>

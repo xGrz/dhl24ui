@@ -5,6 +5,7 @@ namespace xGrz\Dhl24UI\Livewire\Forms;
 use Livewire\Form;
 use xGrz\Dhl24\Models\DHLContentSuggestion;
 use xGrz\Dhl24\Models\DHLCostCenter;
+use xGrz\Dhl24UI\Helpers\Money;
 
 class ShippingServices extends Form
 {
@@ -17,6 +18,7 @@ class ShippingServices extends Form
     public string $value = '';
     public string $cod = '';
     public string $reference = '';
+    public string $comment = '';
     public bool $pdi = false;
     public bool $rod = false;
     public bool $owl = false;
@@ -50,15 +52,16 @@ class ShippingServices extends Form
 
     public function getCod()
     {
-        if (!empty($this->cod)) {
-            return 0;
-        }
-        return 0;
+        return empty($this->cod)
+            ? 0
+            : Money::from($this->cod)->toNumber();
     }
 
     public function getValue()
     {
-        return 0;
+        return empty($this->cod)
+            ? 0
+            : Money::from($this->value)->toNumber();
     }
 
 }

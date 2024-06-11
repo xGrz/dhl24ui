@@ -16,12 +16,12 @@ class ShipmentsController extends BaseController
         ]);
     }
 
-//    public function create()
-//    {
-//        return view('dhl-ui::shipments.create', [
-//            'title' => 'Crete shipment',
-//        ]);
-//    }
+    public function create()
+    {
+        return view('dhl-ui::shipments.create', [
+            'title' => 'Crete shipment',
+        ]);
+    }
 
     public function show(DHLShipment $shipment)
     {
