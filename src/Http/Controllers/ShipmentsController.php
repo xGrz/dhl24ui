@@ -9,6 +9,7 @@ class ShipmentsController extends BaseController
 {
     public function index()
     {
+
         return view('dhl-ui::shipments.index', [
             'title' => 'Shipments',
             'shipments' => DHL24::shipments()->orderByDesc('shipment_date')->orderByDesc('number')->paginate()
@@ -35,5 +36,7 @@ class ShipmentsController extends BaseController
 //    {
 //        dd($request->all());
 //    }
+
+
 
 }

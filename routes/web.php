@@ -19,6 +19,7 @@ Route::middleware(['web'])
         Route::get('/shipments/{shipment}/label', LabelController::class)->name('shipments.label');
         Route::get('/shipments/{shipment}/cost', CostController::class)->name('shipments.cost');
         Route::resource('/shipments', ShipmentsController::class);
+        Route::get('/bookings/{shipment}/book-courier', [CourierBookingsController::class, 'bookCourier'])->name('shipments.book-courier');
         Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')
             ->name('settings.')
