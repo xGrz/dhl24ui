@@ -32,7 +32,7 @@ class CourierBookingsController extends BaseController
 
     public function bookCourier(DHLShipment $shipment)
     {
-        (new DHLBookingService($shipment))->book();
+        (new DHLBookingService())->book('13:00', '15:00', $shipment);
         return back();
     }
 

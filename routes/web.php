@@ -9,6 +9,7 @@ use xGrz\Dhl24UI\Http\Controllers\SettingsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsCostCentersController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
 use xGrz\Dhl24UI\Http\Controllers\ShipmentsController;
+use xGrz\Dhl24UI\Http\Controllers\SingleShipmentBookingController;
 
 Route::middleware(['web'])
     ->prefix('dhl')
@@ -18,8 +19,13 @@ Route::middleware(['web'])
 
         Route::get('/shipments/{shipment}/label', LabelController::class)->name('shipments.label');
         Route::get('/shipments/{shipment}/cost', CostController::class)->name('shipments.cost');
+        Route::name('shipments.booking.')
+            ->prefix('shipments/{shipment}')
+            ->group(function () {
+                Route::get('create-booking', [SingleShipmentBookingController::class, 'create'])->name('create');
+                //Route::post('store-booking', 'store')->name('store');
+            });
         Route::resource('/shipments', ShipmentsController::class);
-        Route::get('/bookings/{shipment}/book-courier', [CourierBookingsController::class, 'bookCourier'])->name('shipments.book-courier');
         Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')
             ->name('settings.')

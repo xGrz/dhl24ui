@@ -7,9 +7,11 @@ use LivewireUI\Modal\ModalComponent;
 class ShipmentCreateError extends ModalComponent
 {
     public string $message = '';
+    public string $title = '';
 
-    public function mount(string $message)
+    public function mount(string $title, string $message)
     {
+        $this->title = $title;
         $this->message = $message;
     }
 

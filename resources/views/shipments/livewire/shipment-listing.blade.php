@@ -51,7 +51,7 @@
                             </x-p-td>
                             <x-p-td right>
                                 @if (!$shipment->courier_booking_id)
-                                    <x-p-button href="{{ route('dhl24.shipments.book-courier', $shipment->id) }}"
+                                    <x-p-button href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"
                                                 size="small">
                                         Book
                                     </x-p-button>

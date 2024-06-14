@@ -5,7 +5,9 @@ namespace xGrz\Dhl24UI;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use xGrz\Dhl24UI\Livewire\BookingFromSelector;
 use xGrz\Dhl24UI\Livewire\CreateShipment;
+use xGrz\Dhl24UI\Livewire\CreateSingleShipmentBooking;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentCreate;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentDelete;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentEdit;
@@ -48,7 +50,7 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('content-delete', ContentDelete::class);
         Livewire::component('tracking-states-listing', TrackingStateListing::class);
         Livewire::component('tracking-event-edit', TrackingStateEdit::class);
-
+        Livewire::component('create-single-shipment-booking', CreateSingleShipmentBooking::class);
     }
 
     private function setupWebRouting(): void

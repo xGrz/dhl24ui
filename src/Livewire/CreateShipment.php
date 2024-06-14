@@ -93,6 +93,7 @@ class CreateShipment extends Component
             return redirect(route('dhl24.shipments.index'));
         } catch (DHL24Exception $e) {
             $this->dispatch('openModal', component: 'shipment-create-error', arguments: [
+                'title' => 'Shipment create failed',
                 'message' => $e->getMessage()
             ]);
             $this->dispatch('$reload');
