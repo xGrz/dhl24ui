@@ -42,6 +42,7 @@ class CreateSingleShipmentBooking extends Component
         $to = Carbon::parse($this->pickupDate . ' ' . $this->pickupTo);
         try {
             DHL24::booking()->book($from, $to, $this->shipment, $this->comment);
+            session()->flash('success', 'Courier successfully booked for ' . $from->format('d-m-Y') . ' between ' . $from->format('H:i') . '-' . $to->format('H:i'));
             $this->redirectRoute('dhl24.shipments.index');
         } catch (DHL24Exception $e) {
             $this->dispatch('openModal', component: 'shipment-create-error', arguments: ['title' => 'Courier booking failed', 'message' => $e->getMessage()]);
