@@ -29,8 +29,6 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^10.0|^11.0",
-        "xgrz/dhl24": "dev-main",
-        "xgrz/qbp": "dev-main",
         "livewire/livewire": "^3.0",
         "wire-elements/modal": "^2.0"
     },
