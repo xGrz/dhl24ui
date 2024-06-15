@@ -35,6 +35,12 @@ class DHLUIServiceProvider extends ServiceProvider
         self::setupWebRouting();
         self::setupTranslations();
 
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/dhl24ui'),
+            ], 'dhl24ui');
+        }
+
         Livewire::component('create-shipment', CreateShipment::class);
         Livewire::component('shipment-create-error', ShipmentCreateError::class);
         Livewire::component('shipment-listing', ShipmentListing::class);
