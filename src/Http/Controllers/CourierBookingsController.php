@@ -21,12 +21,6 @@ class CourierBookingsController extends BaseController
     {
         return view('dhl-ui::bookings.create', [
             'title' => 'Book courier',
-            'shipments' => DHLShipment::whereDoesntHave('courier_booking')
-                ->whereDoesntHave('tracking')
-                ->latest()
-                ->limit(5)
-                ->get(),
-
         ]);
     }
 
