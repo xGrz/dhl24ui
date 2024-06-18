@@ -47,7 +47,6 @@ class CreateSingleShipmentBooking extends Component
         } catch (DHL24Exception $e) {
             $this->dispatch('openModal', component: 'shipment-create-error', arguments: ['title' => 'Courier booking failed', 'message' => $e->getMessage()]);
         }
-
     }
 
     private function refreshPickupFromOptions(): array
