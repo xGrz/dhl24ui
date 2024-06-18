@@ -52,7 +52,7 @@ class CreateSingleShipmentBooking extends Component
     private function refreshPickupFromOptions(): array
     {
         $pickupFromOptions = DHL24::booking()
-            ->options($this->postalCode)
+            ->options($this->shipment)
             ->pickupStartingOptions(Carbon::parse($this->pickupDate));
         $testArr = [];
         foreach ($pickupFromOptions as $pickupFromOption) {
@@ -70,7 +70,7 @@ class CreateSingleShipmentBooking extends Component
     private function refreshPickupToOptions(): array
     {
         $pickupToOptions = DHL24::booking()
-            ->options($this->postalCode)
+            ->options($this->shipment)
             ->pickupEndingOptions(Carbon::parse($this->pickupDate . ' ' . $this->pickupFrom));
         $testArr = [];
         foreach ($pickupToOptions as $pickupToOption) {

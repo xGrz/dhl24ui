@@ -15,7 +15,7 @@ class SingleShipmentBookingController extends BaseController
         return view('dhl-ui::shipments.create-booking', [
             'title' => 'Book courier',
             'shipment' => $shipment,
-            'dateOptions' => DHL24::booking()->options($shipment->shipper_postal_code)->availableDates(),
+            'dateOptions' => DHL24::booking()->options($shipment)->availableDates(),
         ]);
     }
 }

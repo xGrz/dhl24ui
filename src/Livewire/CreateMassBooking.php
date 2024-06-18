@@ -106,7 +106,7 @@ class CreateMassBooking extends Component
             self::resetBooking();
             return;
         }
-        $this->dateOptions = DHL24::booking()->options($this->postalCode)->availableDates();
+        $this->dateOptions = DHL24::booking()->options(self::getSelectedShipments())->availableDates();
         $this->pickupDate = $this->dateOptions[0];
     }
 
@@ -122,7 +122,7 @@ class CreateMassBooking extends Component
     {
         if (!$this->postalCode) return [];
         $pickupFromOptions = DHL24::booking()
-            ->options($this->postalCode, self::getSelectedShipments())
+            ->options(self::getSelectedShipments())
             ->pickupStartingOptions(Carbon::parse($this->pickupDate));
         $testArr = [];
         foreach ($pickupFromOptions as $pickupFromOption) {
@@ -141,7 +141,7 @@ class CreateMassBooking extends Component
     {
         if (!$this->postalCode) return [];
         $pickupToOptions = DHL24::booking()
-            ->options($this->postalCode, self::getSelectedShipments())
+            ->options(self::getSelectedShipments())
             ->pickupEndingOptions(Carbon::parse($this->pickupDate . ' ' . $this->pickupFrom));
         $testArr = [];
         foreach ($pickupToOptions as $pickupToOption) {
