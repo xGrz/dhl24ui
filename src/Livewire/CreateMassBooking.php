@@ -24,12 +24,13 @@ class CreateMassBooking extends Component
     public string $pickupTo = '';
     public string $info = '';
 
-    public function mount()
+    public function mount(): void
     {
         $this->shipments = DHLShipment::whereDoesntHave('courier_booking')
+            ->with('items')
             ->whereDoesntHave('tracking')
             ->latest()
-            ->limit(5)
+            ->limit(10)
             ->get();
     }
 
@@ -44,15 +45,12 @@ class CreateMassBooking extends Component
         return view('dhl-ui::bookings.create-mass-booking');
     }
 
-    public function book()
+    public function book(): void
     {
         $from = Carbon::parse($this->pickupDate . ' ' . $this->pickupFrom);
         $to = Carbon::parse($this->pickupDate . ' ' . $this->pickupTo);
-        $shipmentList = $this->shipments->filter( function ($shipment) {
-            return in_array($shipment->number, $this->shipmentList);
-        });
         try {
-            $booked = DHL24::booking()->book($from, $to, $shipmentList, $this->info);
+            DHL24::booking()->book($from, $to, self::getSelectedShipments(), $this->info);
         } catch (DHL24Exception $e) {
             dd($e->getMessage());
         }
@@ -88,7 +86,7 @@ class CreateMassBooking extends Component
         }
 
         $this->postalCode = $this->shipments
-            ->filter(fn($shipment) => $shipment->number === (int) $this->shipmentList[0])
+            ->filter(fn($shipment) => $shipment->number === (int)$this->shipmentList[0])
             ?->first()
             ->shipper_postal_code;
     }
@@ -112,11 +110,19 @@ class CreateMassBooking extends Component
         $this->pickupDate = $this->dateOptions[0];
     }
 
+    private function getSelectedShipments()
+    {
+        return $this->shipments->filter(function ($shipment) {
+            return in_array($shipment->number, $this->shipmentList);
+        });
+
+    }
+
     private function refreshPickupFromOptions(): array
     {
         if (!$this->postalCode) return [];
         $pickupFromOptions = DHL24::booking()
-            ->options($this->postalCode)
+            ->options($this->postalCode, self::getSelectedShipments())
             ->pickupStartingOptions(Carbon::parse($this->pickupDate));
         $testArr = [];
         foreach ($pickupFromOptions as $pickupFromOption) {
@@ -135,7 +141,7 @@ class CreateMassBooking extends Component
     {
         if (!$this->postalCode) return [];
         $pickupToOptions = DHL24::booking()
-            ->options($this->postalCode)
+            ->options($this->postalCode, self::getSelectedShipments())
             ->pickupEndingOptions(Carbon::parse($this->pickupDate . ' ' . $this->pickupFrom));
         $testArr = [];
         foreach ($pickupToOptions as $pickupToOption) {

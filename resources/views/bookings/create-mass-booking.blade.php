@@ -12,7 +12,8 @@
                     <x-p-th left>Shipment date</x-p-th>
                     <x-p-th left>Shipper</x-p-th>
                     <x-p-th left>Receiver</x-p-th>
-                    <x-p-th right>Number of packages</x-p-th>
+                    <x-p-th left>Type</x-p-th>
+                    <x-p-th right>Items</x-p-th>
                 </x-p-tr>
             </x-p-thead>
             <x-p-tbody>
@@ -25,7 +26,16 @@
                         <x-p-td>{{$shipment->shipment_date->format('d-m-Y')}}</x-p-td>
                         <x-p-td>{{$shipment->shipper_name}}</x-p-td>
                         <x-p-td>{{$shipment->receiver_name}}</x-p-td>
-                        <x-p-td right>{{$shipment->items->count()}}</x-p-td>
+                        <x-p-td>
+                            @if($shipment->isExpress())
+                                <span class="text-green-600">Express</span>
+                            @else
+                                <span class="text-amber-600">Pallet</span>
+                            @endif
+                        </x-p-td>
+                        <x-p-td right>
+                            {{$shipment->items->count()}}
+                        </x-p-td>
                     </x-p-tr>
                 @endforeach
             </x-p-tbody>
