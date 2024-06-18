@@ -3,7 +3,9 @@
     <x-p-paper>
         <x-slot:title>ShipmentDraft list</x-slot:title>
         <x-slot:actions>
-            <x-p-button href="{{ route('dhl24.shipments.create') }}" color="success">Create</x-p-button>
+            <x-p-button href="{{ route('dhl24.shipments.create') }}" color="info">Create</x-p-button>
+            <x-p-button href="{{ route('dhl24.bookings.create') }}" color="warning">Book</x-p-button>
+            <x-p-button color="success">Report</x-p-button>
         </x-slot:actions>
         @if($shipments)
             <x-p-table>
@@ -13,9 +15,9 @@
                         <x-p-th>State</x-p-th>
                         <x-p-th>Sender</x-p-th>
                         <x-p-th>Receiver</x-p-th>
-                        <x-p-th center>Items</x-p-th>
+                        <x-p-th left>Items</x-p-th>
+                        <x-p-th>Type/Booking</x-p-th>
                         <x-p-th right>COD</x-p-th>
-                        <x-p-th center>Cost</x-p-th>
                         <x-p-th right>Options</x-p-th>
                     </x-p-tr>
                 </x-p-thead>
@@ -23,32 +25,38 @@
                     @foreach($shipments as $shipment)
                         <x-p-tr>
                             <x-p-td>
+                                <span class="block text-sm">
+                                    {{ $shipment->shipment_date->format('d-m-Y') }}
+                                </span>
                                 <x-p-link href="{{route('dhl24.shipments.show', $shipment->id)}}">
                                     {{ $shipment->number }}
                                 </x-p-link>
-                                <span class="block text-sm">
-                                    {{ $shipment->courier_booking?->order_id }}
-                                    </span>
-                                <span class="block text-sm">
-                                    {{ $shipment->shipment_date->format('d-m-Y') }}
-                                    </span>
                             </x-p-td>
                             <x-p-td>
                                 <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
                             </x-p-td>
-                            <x-p-td>
+                            <x-p-td class="text-sm">
                                 {{ $shipment->shipper_name }}
                             </x-p-td>
-                            <x-p-td>
+                            <x-p-td class="text-sm">
                                 {{ $shipment->receiver_name }}<br/>
                                 {{ $shipment->receiver_postal_code }} {{ $shipment->receiver_city }}
                             </x-p-td>
-                            <x-p-td center>{{ $shipment->items->count() }}</x-p-td>
-                            <x-p-td right>{{ $shipment->collect_on_delivery }}</x-p-td>
-                            <x-p-td right>
-                                {{ $shipment->cost }}
-                                <div class="text-xs">{{ $shipment->cost_center?->name }}</div>
+                            <x-p-td left>{{ $shipment->items->count() }}</x-p-td>
+                            <x-p-td>
+                                @if($shipment->isExpress())
+                                    <span class="text-green-600 block">Express</span>
+                                @else
+                                    <span class="text-amber-600 block">Pallet</span>
+                                @endif
+                                @if($shipment->courier_booking)
+                                    <x-p-link class="text-sm"
+                                              href="{{route('dhl24.bookings.show', $shipment->courier_booking->id)}}">
+                                        {{ $shipment->courier_booking?->order_id }}
+                                    </x-p-link>
+                                @endif
                             </x-p-td>
+                            <x-p-td right>{{ $shipment->collect_on_delivery }}</x-p-td>
                             <x-p-td right>
                                 @if (!$shipment->courier_booking_id)
                                     <x-p-button href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"
