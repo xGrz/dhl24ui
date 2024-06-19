@@ -157,7 +157,23 @@
                 </x-dhl-ui::shipment-detail-chip>
                 <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Courier booking id</x-slot:name>
-                    <x-slot:value>{{ $shipment->courier_booking?->order_id }}</x-slot:value>
+                    <x-slot:value>
+                        @if($shipment->courier_booking)
+                            <x-p-link href="{{route('dhl24.bookings.show', $shipment->courier_booking?->id)}}">
+                                {{$shipment->courier_booking->order_id}}
+                            </x-p-link>
+                        @endif
+                    </x-slot:value>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
+                    <x-slot:name>Cost center</x-slot:name>
+                    <x-slot:value>
+                        @if($shipment->cost_center)
+                            <x-p-link href="{{route('dhl24.costs-center.show', $shipment->cost_center->id)}}">
+                                {{$shipment->cost_center?->name}}
+                            </x-p-link>
+                        @endif
+                    </x-slot:value>
                 </x-dhl-ui::shipment-detail-chip>
                 <x-dhl-ui::shipment-detail-chip class="md:col-span-2 md:col-span-2 lg:col-span-4 xl:md-col-span-6">
                     <x-slot:name>Comment</x-slot:name>

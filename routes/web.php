@@ -2,6 +2,7 @@
 
 
 use xGrz\Dhl24UI\Http\Controllers\CostController;
+use xGrz\Dhl24UI\Http\Controllers\CostsCenterController;
 use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
 use xGrz\Dhl24UI\Http\Controllers\LabelController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
@@ -35,5 +36,7 @@ Route::middleware(['web'])
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
                 Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
+        Route::get('costs-center', [CostsCenterController::class, 'index'])->name('costs-center.index');
+        Route::get('costs-center/{costsCenter}', fn() => '')->name('costs-center.show')->withTrashed();
     });
 
