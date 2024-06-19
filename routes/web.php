@@ -23,7 +23,7 @@ Route::middleware(['web'])
             ->prefix('shipments/{shipment}')
             ->group(function () {
                 Route::get('create-booking', [SingleShipmentBookingController::class, 'create'])->name('create');
-                //Route::post('store-booking', 'store')->name('store');
+
             });
         Route::resource('/shipments', ShipmentsController::class);
         Route::resource('/bookings', CourierBookingsController::class);

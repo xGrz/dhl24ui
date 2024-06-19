@@ -20,6 +20,7 @@ class CreateSingleShipmentBooking extends Component
     public string|null $pickupTo = null;
     public array $pickupToOptions = [];
     public string $comment = '';
+    public string $info = '';
 
     public function mount(DHLShipment $shipment, array $dateOptions): void
     {
@@ -54,11 +55,6 @@ class CreateSingleShipmentBooking extends Component
         $pickupFromOptions = DHL24::booking()
             ->options($this->shipment)
             ->pickupStartingOptions(Carbon::parse($this->pickupDate));
-        $testArr = [];
-        foreach ($pickupFromOptions as $pickupFromOption) {
-            $testArr[Carbon::parse($this->pickupDate)->format('Ymd') . str_replace(':', '', $pickupFromOption)] = $pickupFromOption;
-        }
-        $pickupFromOptions = $testArr;
 
         if (empty($this->pickupFrom)) $this->pickupFrom = collect($pickupFromOptions)->first();
         if (!in_array($this->pickupFrom, $pickupFromOptions)) {
@@ -72,11 +68,6 @@ class CreateSingleShipmentBooking extends Component
         $pickupToOptions = DHL24::booking()
             ->options($this->shipment)
             ->pickupEndingOptions(Carbon::parse($this->pickupDate . ' ' . $this->pickupFrom));
-        $testArr = [];
-        foreach ($pickupToOptions as $pickupToOption) {
-            $testArr[Carbon::parse($this->pickupDate)->format('Ymd') . str_replace(':', '', $pickupToOption)] = $pickupToOption;
-        }
-        $pickupToOptions = $testArr;
 
         if (empty($this->pickupTo)) $this->pickupTo = end($pickupToOptions);
         if (!in_array($this->pickupTo, $pickupToOptions)) {

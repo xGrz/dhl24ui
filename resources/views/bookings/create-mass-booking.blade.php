@@ -25,13 +25,7 @@
                         <x-p-td>{{$shipment->shipment_date->format('d-m-Y')}}</x-p-td>
                         <x-p-td>{{$shipment->shipper_name}}</x-p-td>
                         <x-p-td>{{$shipment->receiver_name}}</x-p-td>
-                        <x-p-td>
-                            @if($shipment->isExpress())
-                                <span class="text-green-600">Express</span>
-                            @else
-                                <span class="text-amber-600">Pallet</span>
-                            @endif
-                        </x-p-td>
+                        <x-p-td><x-dhl-ui::shipment-type :shipment="$shipment" /></x-p-td>
                         <x-p-td right>
                             {{$shipment->items->count()}}
                         </x-p-td>
@@ -41,9 +35,7 @@
         </x-p-table>
     </x-p-paper>
     @if($postalCode)
-        <div>
-            @include('dhl-ui::bookings.bookingDateForm')
-        </div>
-    @endif
+        @include('dhl-ui::bookings.bookingDateForm')
+   @endif
     <div wire:loading>Loading...</div>
 </div>

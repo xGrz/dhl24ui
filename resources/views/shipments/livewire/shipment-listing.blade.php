@@ -44,11 +44,7 @@
                             </x-p-td>
                             <x-p-td left>{{ $shipment->items->count() }}</x-p-td>
                             <x-p-td>
-                                @if($shipment->isExpress())
-                                    <span class="text-green-600 block">Express</span>
-                                @else
-                                    <span class="text-amber-600 block">Pallet</span>
-                                @endif
+                                <x-dhl-ui::shipment-type :shipment="$shipment" />
                                 @if($shipment->courier_booking)
                                     <x-p-link class="text-sm"
                                               href="{{route('dhl24.bookings.show', $shipment->courier_booking->id)}}">

@@ -12,7 +12,7 @@ class CourierBookingsController extends BaseController
     {
         return view('dhl-ui::bookings.index', [
             'title' => 'Courier Bookings',
-            'bookings' => DHLCourierBooking::with('shipments')->latest()->paginate(),
+            'bookings' => DHLCourierBooking::orderByDesc('pickup_from')->with('shipments')->latest()->paginate(),
         ]);
     }
 
@@ -20,6 +20,15 @@ class CourierBookingsController extends BaseController
     {
         return view('dhl-ui::bookings.create', [
             'title' => 'Book courier',
+        ]);
+    }
+
+    public function show(DHLCourierBooking $booking)
+    {
+        $booking->load(['shipments', 'shipments.items', 'shipments.tracking']);
+        return view('dhl-ui::bookings.show', [
+            'title' => 'Booking details',
+            'booking' => $booking,
         ]);
     }
 

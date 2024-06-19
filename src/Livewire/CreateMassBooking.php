@@ -124,11 +124,6 @@ class CreateMassBooking extends Component
         $pickupFromOptions = DHL24::booking()
             ->options(self::getSelectedShipments())
             ->pickupStartingOptions(Carbon::parse($this->pickupDate));
-        $testArr = [];
-        foreach ($pickupFromOptions as $pickupFromOption) {
-            $testArr[Carbon::parse($this->pickupDate)->format('Ymd') . str_replace(':', '', $pickupFromOption)] = $pickupFromOption;
-        }
-        $pickupFromOptions = $testArr;
 
         if (empty($this->pickupFrom)) $this->pickupFrom = collect($pickupFromOptions)->first();
         if (!in_array($this->pickupFrom, $pickupFromOptions)) {
@@ -143,11 +138,6 @@ class CreateMassBooking extends Component
         $pickupToOptions = DHL24::booking()
             ->options(self::getSelectedShipments())
             ->pickupEndingOptions(Carbon::parse($this->pickupDate . ' ' . $this->pickupFrom));
-        $testArr = [];
-        foreach ($pickupToOptions as $pickupToOption) {
-            $testArr[Carbon::parse($this->pickupDate)->format('Ymd') . str_replace(':', '', $pickupToOption)] = $pickupToOption;
-        }
-        $pickupToOptions = $testArr;
 
         if (empty($this->pickupTo)) $this->pickupTo = end($pickupToOptions);
         if (!in_array($this->pickupTo, $pickupToOptions)) {

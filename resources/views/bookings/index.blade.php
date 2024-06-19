@@ -7,7 +7,7 @@
         <x-slot:actions>
             <x-p-button color="success" href="{{ route('dhl24.bookings.create') }}">New courier booking</x-p-button>
         </x-slot:actions>
-        @if($bookings)
+        @if($bookings->count())
             <x-p-table>
                 <x-p-thead>
                     <x-p-tr>
@@ -22,7 +22,11 @@
                 <x-p-tbody>
                     @foreach($bookings as $booking)
                         <x-p-tr>
-                            <x-p-td>{{ $booking->order_id }}</x-p-td>
+                            <x-p-td>
+                                <x-p-link href="{{route('dhl24.bookings.show', $booking->id)}}">
+                                    {{ $booking->order_id }}
+                                </x-p-link>
+                            </x-p-td>
                             <x-p-td>{{$booking->pickup_from->format('d-m-Y')}}</x-p-td>
                             <x-p-td center>
                                 {{ $booking->pickup_from->format("H:i") }}
@@ -45,7 +49,7 @@
                 <x-p-pagination :source="$bookings"/>
             </div>
         @else
-            <x-p-not-found message="Items not found."/>
+            <x-p-not-found message="Bookings not found."/>
         @endif
 
     </x-p-paper>
