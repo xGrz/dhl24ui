@@ -37,6 +37,6 @@ Route::middleware(['web'])
                 Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
         Route::get('costs-center', [CostsCenterController::class, 'index'])->name('costs-center.index');
-        Route::get('costs-center/{costsCenter}', fn() => '')->name('costs-center.show')->withTrashed();
+        Route::get('costs-center/{costCenter}', [CostsCenterController::class, 'show'])->name('costs-center.show')->withTrashed();
     });
 

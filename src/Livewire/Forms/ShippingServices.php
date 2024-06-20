@@ -35,6 +35,12 @@ class ShippingServices extends Form
         $this->costCenterName = $this->costsCenter[0] ?? '';
     }
 
+    public function getCostCenter(): ?DHLCostCenter
+    {
+        if(!$this->costCenterName) return null;
+        return DHLCostCenter::where('name', $this->costCenterName)->first();
+    }
+
     public function getContentSuggestions(): void
     {
         $suggestions = DHLContentSuggestion::orderBy('name')->get();

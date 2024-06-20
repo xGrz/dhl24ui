@@ -15,13 +15,19 @@ class CostsCenterController extends BaseController
                 ->orderByRaw('CASE WHEN `deleted_at` IS NOT NULL THEN 1 ELSE 0 END ASC')
                 ->orderBy('name', 'asc')
                 ->withCount('shipments')
+                ->withSum('shipments', 'cost')
+                ->withAvg('shipments', 'cost')
+                ->withCount('shipmentItems')
+                ->withAvg('shipmentItems', 'quantity')
                 ->paginate()
         ]);
     }
 
     public function show(DHLCostCenter $costCenter)
     {
-        dd($costCenter);
+        return view('dhl-ui::costs-center.show', [
+            'title' => 'Cost center details',
+            'costCenter' => $costCenter
+        ]);
     }
 }
-

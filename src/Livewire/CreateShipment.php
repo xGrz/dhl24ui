@@ -72,7 +72,9 @@ class CreateShipment extends Component
             ->shipmentType(DHLDomesticShipmentType::from($this->services->deliveryService))
             ->collectOnDelivery($this->services->getCod(), $this->services->reference)
             ->shipmentValue($this->services->getValue())
-            ->content($this->services->content);
+            ->content($this->services->content)
+            ->costCenter($this->services->getCostCenter())
+        ;
 
         foreach ($this->items as $item) {
             $wizard->addItem(

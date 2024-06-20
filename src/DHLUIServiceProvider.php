@@ -5,7 +5,7 @@ namespace xGrz\Dhl24UI;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use xGrz\Dhl24UI\Livewire\BookingFromSelector;
+use xGrz\Dhl24UI\Livewire\CostsCenterDetails;
 use xGrz\Dhl24UI\Livewire\CreateMassBooking;
 use xGrz\Dhl24UI\Livewire\CreateShipment;
 use xGrz\Dhl24UI\Livewire\CreateSingleShipmentBooking;
@@ -59,6 +59,7 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('tracking-event-edit', TrackingStateEdit::class);
         Livewire::component('create-single-shipment-booking', CreateSingleShipmentBooking::class);
         Livewire::component('create-mass-booking', CreateMassBooking::class);
+        Livewire::component('costs-center-details', CostsCenterDetails::class);
     }
 
     private function setupWebRouting(): void
