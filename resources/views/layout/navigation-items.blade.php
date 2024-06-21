@@ -6,6 +6,10 @@
     <x-p::icons.truck class="w-5 md:w-8 h-5 md:h-8 mr-1 md:block"/>
     Courier bookings
 </x-p-nav-item>
+<x-p-nav-item routeName="dhl24.costs-center.index">
+    <x-p::icons.money class="w-5 md:w-8 h-5 md:h-8 mr-1 md:block"/>
+    Costs
+</x-p-nav-item>
 <x-p-nav-item routeName="dhl24.settings.index">
     <x-p::icons.settings class="w-5 md:w-8 h-5 md:h-8 mr-1 md:block"/>
     Settings
