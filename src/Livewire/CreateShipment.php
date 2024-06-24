@@ -10,11 +10,11 @@ use xGrz\Dhl24\Enums\DHLDomesticShipmentType;
 use xGrz\Dhl24\Enums\DHLShipmentItemType;
 use xGrz\Dhl24\Exceptions\DHL24Exception;
 use xGrz\Dhl24\Wizard\DHLShipmentWizard;
-use xGrz\Dhl24UI\Helpers\Money;
 use xGrz\Dhl24UI\Http\Requests\StoreShipmentRequest;
 use xGrz\Dhl24UI\Livewire\Forms\ShipmentContactForm;
 use xGrz\Dhl24UI\Livewire\Forms\ShipmentRecipientForm;
 use xGrz\Dhl24UI\Livewire\Forms\ShippingServices;
+use xGrz\Qbp\Helpers\Money;
 
 class CreateShipment extends Component
 {
@@ -110,6 +110,8 @@ class CreateShipment extends Component
 
     public function updatedRecipientPostalCode(): void
     {
+        dd('updated, and what?');
+        //todo: WTF?
         strlen($this->recipient->postalCode) > 4
             ? self::getServicesForPostalCode()
             : $this->services->services = [];

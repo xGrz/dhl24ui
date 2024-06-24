@@ -44,7 +44,7 @@
                             </x-p-td>
                             <x-p-td left>{{ $shipment->items->count() }}</x-p-td>
                             <x-p-td>
-                                <x-dhl-ui::shipment-type :shipment="$shipment" />
+                                <x-dhl-ui::shipment-type :shipment="$shipment"/>
                                 @if($shipment->courier_booking)
                                     <x-p-link class="text-sm"
                                               href="{{route('dhl24.bookings.show', $shipment->courier_booking->id)}}">
@@ -52,7 +52,11 @@
                                     </x-p-link>
                                 @endif
                             </x-p-td>
-                            <x-p-td right>{{ $shipment->collect_on_delivery }}</x-p-td>
+                            <x-p-td right>
+                                @if($shipment->collect_on_delivery)
+                                    {{ money($shipment->collect_on_delivery) }}
+                                @endif
+                            </x-p-td>
                             <x-p-td right>
                                 @if (!$shipment->courier_booking_id)
                                     <x-p-button href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"

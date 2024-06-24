@@ -9,10 +9,12 @@ use xGrz\Dhl24\Facades\DHL24;
 class CostCenterListing extends Component
 {
     public $costCenters = null;
+    public $trashedCostCenters = null;
 
     public function mount(): void
     {
         $this->costCenters = DHL24::costsCenter()->query()->sortedByNames()->get();
+        $this->trashedCostCenters = DHL24::costsCenter()->query()->onlyTrashed()->sortedByNames()->get();
     }
 
     public function render(): View
@@ -25,6 +27,14 @@ class CostCenterListing extends Component
         DHL24::costsCenter($itemId)->delete();
         $name = $this->costCenters->find($itemId)->name;
         session()->flash('success', "Cost center $name has been deleted.");
+        $this->redirectRoute('dhl24.settings.costCenters.index');
+    }
+
+    public function restore($itemId): void
+    {
+        DHL24::costsCenter($itemId)->restore();
+        $name = $this->trashedCostCenters->find($itemId)->name;
+        session()->flash('success', "Cost center $name has been restored.");
         $this->redirectRoute('dhl24.settings.costCenters.index');
     }
 

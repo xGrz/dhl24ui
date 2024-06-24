@@ -60,4 +60,37 @@
             </x-p-table>
         </div>
     </x-p-paper>
+    @if($trashedCostCenters->count())
+        <x-p-paper>
+            <x-slot:title>Archive cost centers (deleted)</x-slot:title>
+            <x-p-table>
+                <x-p-thead>
+                    <x-p-tr>
+                        <x-p-th left>Name</x-p-th>
+                        <x-p-th right>Options</x-p-th>
+                    </x-p-tr>
+                </x-p-thead>
+                <x-p-tbody>
+                    @foreach($trashedCostCenters as $center)
+                        <x-p-tr wire:key="costCenter_{{$center->id}}">
+                            <x-p-td>
+                                {{ $center->name }}
+                            </x-p-td>
+                            <x-p-td right>
+                                <x-p-button
+                                    type="button"
+                                    size="small"
+                                    color="warning"
+                                    wire:click="restore({{$center->id}})"
+                                >
+                                    Restore
+                                </x-p-button>
+
+                            </x-p-td>
+                        </x-p-tr>
+                    @endforeach
+                </x-p-tbody>
+            </x-p-table>
+        </x-p-paper>
+    @endif
 </div>

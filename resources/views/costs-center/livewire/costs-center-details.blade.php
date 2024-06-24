@@ -38,18 +38,18 @@
                     <x-p-td>
                         <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
                     </x-p-td>
-                    <x-p-td right>{{$shipment->cost}}</x-p-td>
+                    <x-p-td right>{{money($shipment->cost, false)->currency(' zł')}}</x-p-td>
                 </x-p-tr>
             @endforeach
         </x-p-tbody>
         <x-p-tfoot>
             <x-p-tr>
                 <x-p-td right class="!py-0" colspan="4">Page total:</x-p-td>
-                <x-p-td right class="!py-0">{{$costCenter->shipments->sum(fn($item) => $item->cost)}}</x-p-td>
+                <x-p-td right class="!py-0">{{money($costCenter->shipments->sum(fn($item) => $item->cost))->currency(' zł')}}</x-p-td>
             </x-p-tr>
             <x-p-tr>
                 <x-p-td right class="!py-0" colspan="4">Total selected in period:</x-p-td>
-                <x-p-td right class="!py-0 text-white font-bold">{{$periodSum}}</x-p-td>
+                <x-p-td right class="!py-0 text-white font-bold">{{money($periodSum)->currency(' zł')}}</x-p-td>
             </x-p-tr>
         </x-p-tfoot>
     </x-p-table>

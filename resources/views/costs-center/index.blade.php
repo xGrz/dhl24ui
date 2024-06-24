@@ -34,12 +34,12 @@
                         </x-p-td>
                         <x-p-td right>{{$center->shipments_count}}</x-p-td>
                         <x-p-td right>{{$center->shipment_items_count}}</x-p-td>
-                        <x-p-td right>{{$center->shipment_items_avg_quantity}}</x-p-td>
-                        <x-p-td right>{{$center->shipments_avg_cost}}</x-p-td>
+                        <x-p-td right>{{money($center->shipment_items_avg_quantity)}}</x-p-td>
+                        <x-p-td right>{{money($center->shipments_avg_cost)}}</x-p-td>
                         <x-p-td right>
-                            {{$center->shipments_sum_cost / ($center->shipment_items_count ?: 1) }}
+                            {{money($center->shipments_sum_cost / ($center->shipment_items_count ?: 1)) }}
                         </x-p-td>
-                        <x-p-td right>{{$center->shipments_sum_cost}}</x-p-td>
+                        <x-p-td right>{{money($center->shipments_sum_cost)}}</x-p-td>
                     </x-p-tr>
                 @endforeach
             </x-p-tbody>

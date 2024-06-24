@@ -1,16 +1,14 @@
 @extends('p::app')
 
 @section('content')
+    <div class="text-center mb-1">
+        <h1 class="text-2xl font-bold order-2 md:order-1 mb-0 ">
+            Number: <span class="text-amber-400">{{$shipment->number}}</span>
+        </h1>
+        <x-dhl-ui::shipment-state :status="$shipment->tracking->first()" class="relative -top-1"/>
+    </div>
+
     <div class="grid gap-2">
-        <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
-        <div class="text-right">
-            <x-p-button href="{{route('dhl24.shipments.cost', $shipment->id)}}">
-                Cost
-            </x-p-button>
-            <x-p-button href="{{route('dhl24.shipments.label', $shipment->id)}}">
-                Label
-            </x-p-button>
-        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <x-p-paper>
                 <x-slot:title>Receiver</x-slot:title>
@@ -73,35 +71,49 @@
         </div>
         <x-p-paper>
             <x-slot:title>Package items</x-slot:title>
-            <x-p-table size="small" highlight="false">
-                <x-p-tbody>
-                    @foreach($shipment->items as $item)
-                        <x-p-tr>
-                            <x-p-td>{{$item->type}}</x-p-td>
-                            <x-p-td right>{{$item->quantity}} pcs</x-p-td>
-                            <x-p-td right>{{$item->getWeight()}}</x-p-td>
-                            <x-p-td right>{{$item->getDiamentions()}}</x-p-td>
-                        </x-p-tr>
-                    @endforeach
-                </x-p-tbody>
-            </x-p-table>
-            <div class="max-w-md ms-auto">
-                <x-p-table size="small" highlight="false" class="mt-2">
-                    <x-p-tbody>
-                        <x-p-tr>
-                            <x-p-td>COD:</x-p-td>
-                            <x-p-td right>{{ $shipment->collect_on_delivery }}</x-p-td>
-                        </x-p-tr>
-                        <x-p-tr>
-                            <x-p-td>COD Reference:</x-p-td>
-                            <x-p-td right>{{$shipment->collect_on_delivery_reference}}</x-p-td>
-                        </x-p-tr>
-                        <x-p-tr>
-                            <x-p-td>Insurance:</x-p-td>
-                            <x-p-td right>{{ $shipment->insurance }}</x-p-td>
-                        </x-p-tr>
-                    </x-p-tbody>
-                </x-p-table>
+            <x-slot:actions>
+                <div class="text-right order-1 md:order-2">
+                    <x-p-button href="{{route('dhl24.shipments.label', $shipment->id)}}">Label</x-p-button>
+                </div>
+            </x-slot:actions>
+            @foreach($shipment->items as $item)
+                <div class="grid grid-cols-3 max-w-2xl mx-auto border-b border-slate-500">
+                    <div>
+                        {{$item->quantity}} x {{$item->type->getLabel()}}
+                    </div>
+                    <div class="text-right">{{$item->getDiamentions()}}</div>
+                    <div class="text-right">{{$item->getWeight()}}</div>
+
+                </div>
+            @endforeach
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
+                <x-dhl-ui::shipment-detail-chip>
+                    <x-slot:name>COD value</x-slot:name>
+                    <x-slot:value>
+                        @if (money($shipment->collect_on_delivery)->toNumber())
+                            {{ money($shipment->collect_on_delivery)->currency('zł') }}
+                        @else
+                            No COD
+                        @endif
+                    </x-slot:value>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
+                    <x-slot:name>COD Reference</x-slot:name>
+                    <x-slot:value>
+                        {{$shipment->collect_on_delivery_reference ?? ''}}
+                    </x-slot:value>
+                </x-dhl-ui::shipment-detail-chip>
+                <x-dhl-ui::shipment-detail-chip>
+                    <x-slot:name>Insurance</x-slot:name>
+                    <x-slot:value>
+                        @if (money($shipment->insurance)->toNumber())
+                            {{ money($shipment->insurance)->currency('zł') }}
+                        @else
+                            No insurance
+                        @endif
+                    </x-slot:value>
+                </x-dhl-ui::shipment-detail-chip>
             </div>
         </x-p-paper>
         <x-p-paper>
@@ -121,7 +133,13 @@
                 </x-dhl-ui::shipment-detail-chip>
                 <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Cost center</x-slot:name>
-                    <x-slot:value>{{ $shipment->cost_center?->name }}</x-slot:value>
+                    <x-slot:value>
+                        @if($shipment->cost_center)
+                            <x-p-link href="{{route('dhl24.costs-center.show', $shipment->cost_center->id)}}">
+                                {{$shipment->cost_center?->name}}
+                            </x-p-link>
+                        @endif
+                    </x-slot:value>
                 </x-dhl-ui::shipment-detail-chip>
                 <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Reference</x-slot:name>
@@ -133,7 +151,7 @@
                 </x-dhl-ui::shipment-detail-chip>
                 <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Real cost</x-slot:name>
-                    <x-slot:value>{{ $shipment->cost }}</x-slot:value>
+                    <x-slot:value>{{ money($shipment->cost)->currency('zł') }}</x-slot:value>
                 </x-dhl-ui::shipment-detail-chip>
                 <x-dhl-ui::shipment-detail-chip>
                     <x-slot:name>Proof of delivery</x-slot:name>
@@ -161,16 +179,6 @@
                         @if($shipment->courier_booking)
                             <x-p-link href="{{route('dhl24.bookings.show', $shipment->courier_booking?->id)}}">
                                 {{$shipment->courier_booking->order_id}}
-                            </x-p-link>
-                        @endif
-                    </x-slot:value>
-                </x-dhl-ui::shipment-detail-chip>
-                <x-dhl-ui::shipment-detail-chip>
-                    <x-slot:name>Cost center</x-slot:name>
-                    <x-slot:value>
-                        @if($shipment->cost_center)
-                            <x-p-link href="{{route('dhl24.costs-center.show', $shipment->cost_center->id)}}">
-                                {{$shipment->cost_center?->name}}
                             </x-p-link>
                         @endif
                     </x-slot:value>
