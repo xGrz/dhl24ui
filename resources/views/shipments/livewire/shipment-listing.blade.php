@@ -40,7 +40,7 @@
                             </x-p-td>
                             <x-p-td class="text-sm">
                                 {{ $shipment->receiver_name }}<br/>
-                                {{ $shipment->receiver_postal_code }} {{ $shipment->receiver_city }}
+                                {{ postalCode($shipment->receiver_postal_code, $shipment->receiver_country) }} {{ $shipment->receiver_city }}
                             </x-p-td>
                             <x-p-td left>{{ $shipment->items->count() }}</x-p-td>
                             <x-p-td>

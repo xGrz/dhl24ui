@@ -12,7 +12,10 @@ class ShipmentsController extends BaseController
 
         return view('dhl-ui::shipments.index', [
             'title' => 'Shipments',
-            'shipments' => DHL24::shipments()->orderByDesc('shipment_date')->orderByDesc('number')->paginate()
+            'shipments' => DHL24::shipments()
+                ->orderByDesc('shipment_date')
+                ->orderByDesc('number')
+                ->paginate()
         ]);
     }
 
@@ -31,12 +34,6 @@ class ShipmentsController extends BaseController
             'shipment' => $shipment
         ]);
     }
-
-//    public function store(StoreShipmentRequest $request)
-//    {
-//        dd($request->all());
-//    }
-
 
 
 }
