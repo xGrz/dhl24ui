@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Livewire\CostsCenterListing;
 use xGrz\Dhl24UI\Http\Controllers\CostController;
 use xGrz\Dhl24UI\Http\Controllers\CostsCenterController;
 use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
@@ -36,7 +37,7 @@ Route::middleware(['web'])
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
                 Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
-        Route::get('costs-center', [CostsCenterController::class, 'index'])->name('costs-center.index');
+        Route::get('costs-center', CostsCenterListing::class)->name('costs-center.index');
         Route::get('costs-center/{costCenter}', [CostsCenterController::class, 'show'])->name('costs-center.show')->withTrashed();
     });
 
