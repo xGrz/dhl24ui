@@ -2,30 +2,45 @@
 
 namespace xGrz\Dhl24UI\Livewire;
 
-use Livewire\Component;
+
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use xGrz\Dhl24\Models\DHLCostCenter;
 
-class CostsCenterDetails extends Component
+class DHLCostsCenterShow extends BaseComponent
 {
     use WithPagination;
 
     public DHLCostCenter $costCenter;
     public float $periodSum = 0;
-    public ?string $from = null;
-    public ?string $to = null;
+
+    #[Url]
+    public string $from = '';
+
+    #[Url]
+    public string $to = '';
 
     public function mount(DHLCostCenter $costCenter): void
     {
         $this->costCenter = $costCenter;
-        $this->to = now()->format('Y-m-d');
     }
 
+    public function boot()
+    {
+        $this->from = $this->from ?: now()->startOfMonth()->format('Y-m-d');
+        $this->to = $this->to ?: now()->format('Y-m-d');
+    }
+
+    #[Title('Costs center')]
     public function render()
     {
         self::countPeriodSum();
         self::applyDateRange();
-        return view('dhl-ui::costs-center.livewire.costs-center-details');
+
+        return view('dhl-ui::costs-center.costs-center-show')
+            ->section('content')
+            ->extends('p::app');
     }
 
     public function updatedFrom(): void
@@ -38,11 +53,6 @@ class CostsCenterDetails extends Component
         $this->setPage(1);
         if (!$this->to) $this->to = now()->format('Y-m-d');
     }
-
-    protected $queryString = [
-        'from' => ['except' => ''],
-        'to' => ['except' => ''],
-    ];
 
     private function applyDateRange(): void
     {
@@ -61,7 +71,7 @@ class CostsCenterDetails extends Component
             );
     }
 
-    private function countPeriodSum()
+    private function countPeriodSum(): void
     {
         $this->periodSum = $this
             ->costCenter
@@ -70,7 +80,5 @@ class CostsCenterDetails extends Component
             ->when($this->to, fn($shipmentQuery) => $shipmentQuery->where('shipment_date', '<=', $this->to))
             ->sum('cost');
     }
+
 }
-
-
-

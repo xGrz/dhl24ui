@@ -9,6 +9,8 @@ use xGrz\Dhl24UI\Livewire\CostsCenterDetails;
 use xGrz\Dhl24UI\Livewire\CreateMassBooking;
 use xGrz\Dhl24UI\Livewire\CreateShipment;
 use xGrz\Dhl24UI\Livewire\CreateSingleShipmentBooking;
+use xGrz\Dhl24UI\Livewire\DHLCostsCenterListing;
+use xGrz\Dhl24UI\Livewire\DHLCostsCenterShow;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentCreate;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentDelete;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentEdit;
@@ -43,7 +45,8 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('shipment-listing', ShipmentListing::class);
         Livewire::component('shipment-item', ShipmentListItem::class);
         Livewire::component('shipment-services', ShipmentServices::class);
-
+        Livewire::component('costs-center-listing', DHLCostsCenterListing::class);
+        Livewire::component('costs-center-show', DHLCostsCenterShow::class);
 //        Livewire::component('costs-center-listing', CostCenterListing::class);
 //        Livewire::component('cost-center-create', CostCenterCreate::class);
 //        Livewire::component('cost-center-edit', CostCenterEdit::class);
