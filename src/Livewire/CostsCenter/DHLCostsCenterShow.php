@@ -3,6 +3,7 @@
 namespace xGrz\Dhl24UI\Livewire\CostsCenter;
 
 
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -22,14 +23,14 @@ class DHLCostsCenterShow extends BaseComponent
     #[Url]
     public string $to = '';
 
-    public function boot()
+    public function boot(): void
     {
         $this->from = $this->from ?: now()->startOfMonth()->format('Y-m-d');
         $this->to = $this->to ?: now()->format('Y-m-d');
     }
 
     #[Title('Costs center')]
-    public function render()
+    public function render(): View
     {
         self::countPeriodSum();
         self::applyDateRange();
