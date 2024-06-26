@@ -23,6 +23,7 @@ use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateListing;
 use xGrz\Dhl24UI\Livewire\ShipmentCreateError;
 use xGrz\Dhl24UI\Livewire\ShipmentListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListItem;
+use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsListing;
 use xGrz\Dhl24UI\Livewire\ShipmentServices;
 
 class DHLUIServiceProvider extends ServiceProvider
@@ -51,6 +52,7 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('costs-center-restore', DHLCostsCenterRestore::class);
 
 
+        Livewire::component('shipments-listing', DHLShipmentsListing::class);
 
 
         Livewire::component('create-shipment', CreateShipment::class);

@@ -7,10 +7,10 @@ use xGrz\Dhl24UI\Http\Controllers\LabelController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
-use xGrz\Dhl24UI\Http\Controllers\ShipmentsController;
 use xGrz\Dhl24UI\Http\Controllers\SingleShipmentBookingController;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterListing;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
+use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsListing;
 
 Route::middleware(['web'])
     ->prefix('dhl')
@@ -26,7 +26,8 @@ Route::middleware(['web'])
                 Route::get('create-booking', [SingleShipmentBookingController::class, 'create'])->name('create');
 
             });
-        Route::resource('/shipments', ShipmentsController::class);
+        Route::get('shipments', DHLShipmentsListing::class)->name('shipments.index');
+        //Route::resource('/shipments', ShipmentsController::class);
         Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')
             ->name('settings.')
@@ -35,6 +36,7 @@ Route::middleware(['web'])
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
                 Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
+
         Route::get('costs-center', DHLCostsCenterListing::class)->name('costs-center.index');
         Route::get('costs-center/{costCenter}', DHLCostsCenterShow::class)->name('costs-center.show')->withTrashed();
     });
