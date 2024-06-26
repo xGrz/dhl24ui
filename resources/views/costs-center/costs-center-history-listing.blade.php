@@ -1,9 +1,6 @@
 <x-p-paper>
 
-    <x-slot:title>Costs centers</x-slot:title>
-    <x-slot:actions>
-        <x-p-button wire:click="$dispatch('openModal', {component: 'costs-center-create'})">New</x-p-button>
-    </x-slot:actions>
+    <x-slot:title>Costs centers (deleted)</x-slot:title>
 
     <x-p-pagination livewire :source="$costsCenters"/>
 
@@ -37,41 +34,17 @@
                     </x-p-td>
                     <x-p-td right>{{money($center->shipments_sum_cost)}}</x-p-td>
                     <x-p-td right>
-                        @if($center->is_default)
-                            <button type="button" class="text-yellow-500" disabled>
-                                <x-p::icons.star-full class="w-5 h-5"/>
-                            </button>
-                        @else
-                            <button href="#" wire:click.prevent="setAsDefault({{$center->id}})"
-                                    class="text-slate-500 hover:text-yellow-500 transition-all">
-                                <x-p::icons.star class="w-5 h-5"/>
-                            </button>
-                        @endif
                         <x-p-button
-                            type="button"
+                            color="warning"
                             size="small"
-                            wire:click="$dispatch('openModal', {component: 'costs-center-edit', arguments: { costCenter: {{$center}} } })"
+                            wire:click="restore({{$center->id}})"
                         >
-                            Edit
-                        </x-p-button>
-
-                        <x-p-button
-                            color="danger"
-                            size="small"
-                            wire:click="$dispatch('openModal', {component: 'costs-center-delete', arguments: { costCenter: {{$center}} } })"
-                        >
-                            Delete
+                            Restore
                         </x-p-button>
                     </x-p-td>
                 </x-p-tr>
             @endforeach
         </x-p-tbody>
     </x-p-table>
-    @if($hasHistory)
-        <div class="text-center mt-4">
-            You have historical ({{$hasHistory}}) costs centers.<br/>
-            <x-p-link href="{{route('dhl24.costs-center.history')}}">View deleted costs centers</x-p-link>
-        </div>
-    @endif
 
 </x-p-paper>

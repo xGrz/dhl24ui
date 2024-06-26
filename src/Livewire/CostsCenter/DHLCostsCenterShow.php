@@ -1,12 +1,13 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire;
+namespace xGrz\Dhl24UI\Livewire\CostsCenter;
 
 
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use xGrz\Dhl24\Models\DHLCostCenter;
+use xGrz\Dhl24UI\Livewire\BaseComponent;
 
 class DHLCostsCenterShow extends BaseComponent
 {

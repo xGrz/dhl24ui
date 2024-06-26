@@ -1,6 +1,6 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire;
+namespace xGrz\Dhl24UI\Livewire\CostsCenter;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -8,17 +8,17 @@ use Livewire\Attributes\Title;
 use Livewire\WithPagination;
 use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLCostCenter;
+use xGrz\Dhl24UI\Livewire\BaseComponent;
 
-class DHLCostsCenterListing extends BaseComponent
+class DHLCostsCenterHistoryListing extends BaseComponent
 {
     use WithPagination;
 
-    #[Title('Cost centers')]
+    #[Title('Cost centers history')]
     public function render(): View
     {
-        return view('dhl-ui::costs-center.costs-center-listing', [
+        return view('dhl-ui::costs-center.costs-center-history-listing', [
             'costsCenters' => self::loadCostsCenter(),
-            'hasHistory' => self::hasHistory(),
         ])
             ->section('content')
             ->extends('p::app');
@@ -26,7 +26,7 @@ class DHLCostsCenterListing extends BaseComponent
 
     private function loadCostsCenter(): LengthAwarePaginator
     {
-        return DHLCostCenter::query()
+        return DHLCostCenter::onlyTrashed()
             ->orderBy('name', 'asc')
             ->withCount('shipments')
             ->withSum('shipments', 'cost')
@@ -36,19 +36,13 @@ class DHLCostsCenterListing extends BaseComponent
             ->paginate();
     }
 
-    private function hasHistory(): bool
-    {
-        return (bool)DHLCostCenter::onlyTrashed()->count();
-    }
 
-    public function setAsDefault($costCenterId)
+    public function restore($costCenterId)
     {
-        DHL24::costsCenter($costCenterId)->setDefault();
-        $name = DHLCostCenter::find($costCenterId)->name;
-        session()->flash('info', "Default cost center has been changed to $name.");
-        $this->redirectRoute('dhl24.settings.costCenters.index');
+        DHL24::costsCenter($costCenterId)->restore();
+        session()->flash('success', 'Cost center restored.');
+        $this->redirectRoute('dhl24.costs-center.index');
     }
-
 }
 
 

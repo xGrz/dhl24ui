@@ -1,24 +1,24 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire\Settings\CostsCenter;
+namespace xGrz\Dhl24UI\Livewire\CostsCenter;
 
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
 use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLCostCenter;
 
-class CostCenterDelete extends ModalComponent
+class DHLCostCenterDelete extends ModalComponent
 {
     public ?DHLCostCenter $costCenter = null;
 
     public function mount(DHLCostCenter $costCenter = null): void
     {
-            $this->costCenter = $costCenter;
+        $this->costCenter = $costCenter;
     }
 
     public function render(): View
     {
-        return view('dhl-ui::settings.livewire.costs-center.cost-center-delete');
+        return view('dhl-ui::costs-center.costs-center-delete');
     }
 
     public function deleteConfirmed(): void
@@ -26,7 +26,7 @@ class CostCenterDelete extends ModalComponent
         $this->closeModal();
         DHL24::costsCenter($this->costCenter)->delete();
         session()->flash('success', 'Cost center has been deleted successfully.');
-        $this->redirectRoute('dhl24.settings.costCenters.index');
+        $this->redirectRoute('dhl24.costs-center.index');
     }
 
     public function cancel(): void
