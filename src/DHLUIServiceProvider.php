@@ -5,11 +5,11 @@ namespace xGrz\Dhl24UI;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostCenterCreate;
-use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostCenterDelete;
-use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostCenterEdit;
-use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterHistoryListing;
+use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterCreate;
+use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterDelete;
+use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterEdit;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterListing;
+use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterRestore;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
 use xGrz\Dhl24UI\Livewire\CreateMassBooking;
 use xGrz\Dhl24UI\Livewire\CreateShipment;
@@ -44,11 +44,12 @@ class DHLUIServiceProvider extends ServiceProvider
         }
 
         Livewire::component('costs-center-listing', DHLCostsCenterListing::class);
-        Livewire::component('costs-center-create', DHLCostCenterCreate::class);
+        Livewire::component('costs-center-create', DHLCostsCenterCreate::class);
         Livewire::component('costs-center-show', DHLCostsCenterShow::class);
-        Livewire::component('costs-center-edit', DHLCostCenterEdit::class);
-        Livewire::component('costs-center-delete', DHLCostCenterDelete::class);
-        Livewire::component('costs-center-history-listing', DHLCostsCenterHistoryListing::class);
+        Livewire::component('costs-center-edit', DHLCostsCenterEdit::class);
+        Livewire::component('costs-center-delete', DHLCostsCenterDelete::class);
+        Livewire::component('costs-center-restore', DHLCostsCenterRestore::class);
+
 
 
 

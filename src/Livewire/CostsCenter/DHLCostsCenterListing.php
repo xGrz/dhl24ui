@@ -19,7 +19,6 @@ class DHLCostsCenterListing extends BaseComponent
     {
         return view('dhl-ui::costs-center.costs-center-listing', [
             'costsCenters' => self::loadCostsCenter(),
-            'hasHistory' => self::hasHistory(),
         ])
             ->section('content')
             ->extends('p::app');
@@ -28,6 +27,8 @@ class DHLCostsCenterListing extends BaseComponent
     private function loadCostsCenter(): LengthAwarePaginator
     {
         return DHLCostCenter::query()
+            ->withTrashed()
+            ->orderByRaw('CASE WHEN `deleted_at` IS NULL THEN 0 ELSE 1 END ASC')
             ->orderBy('name', 'asc')
             ->withCount('shipments')
             ->withSum('shipments', 'cost')
@@ -37,18 +38,15 @@ class DHLCostsCenterListing extends BaseComponent
             ->paginate();
     }
 
-    private function hasHistory(): bool
-    {
-        return (bool)DHLCostCenter::onlyTrashed()->count();
-    }
-
     public function setAsDefault($costCenterId): void
     {
         DHL24::costsCenter($costCenterId)->setDefault();
         $name = DHLCostCenter::find($costCenterId)->name;
         session()->flash('info', "Default cost center has been changed to $name.");
-        $this->redirectRoute('dhl24.settings.costCenters.index');
+        $this->redirectRoute('dhl24.costs-center.index');
     }
+
+
 
 }
 

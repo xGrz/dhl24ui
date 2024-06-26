@@ -7,14 +7,9 @@ use LivewireUI\Modal\ModalComponent;
 use xGrz\Dhl24\Facades\DHL24;
 use xGrz\Dhl24\Models\DHLCostCenter;
 
-class DHLCostCenterDelete extends ModalComponent
+class DHLCostsCenterDelete extends ModalComponent
 {
     public ?DHLCostCenter $costCenter = null;
-
-    public function mount(DHLCostCenter $costCenter = null): void
-    {
-        $this->costCenter = $costCenter;
-    }
 
     public function render(): View
     {

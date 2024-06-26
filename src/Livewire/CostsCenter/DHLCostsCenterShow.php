@@ -22,11 +22,6 @@ class DHLCostsCenterShow extends BaseComponent
     #[Url]
     public string $to = '';
 
-    public function mount(DHLCostCenter $costCenter): void
-    {
-        $this->costCenter = $costCenter;
-    }
-
     public function boot()
     {
         $this->from = $this->from ?: now()->startOfMonth()->format('Y-m-d');

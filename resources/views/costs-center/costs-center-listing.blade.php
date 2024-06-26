@@ -24,9 +24,18 @@
             @foreach($costsCenters as $center)
                 <x-p-tr>
                     <x-p-td>
-                        <x-p-link href="{{route('dhl24.costs-center.show', $center->id)}}">
-                            {{$center->name}}
-                        </x-p-link>
+                        @if(!$center->deleted_at)
+                            <x-p-link href="{{route('dhl24.costs-center.show', $center->id)}}">
+                                {{$center->name}}
+                            </x-p-link>
+                        @else
+                            <x-p-link
+                                href="{{route('dhl24.costs-center.show', $center->id)}}"
+                                class="!text-slate-400 hover:!text-slate-200 line-through"
+                            >
+                                {{$center->name}}
+                            </x-p-link>
+                        @endif
                     </x-p-td>
                     <x-p-td right>{{$center->shipments_count}}</x-p-td>
                     <x-p-td right>{{$center->shipment_items_count}}</x-p-td>
@@ -37,41 +46,16 @@
                     </x-p-td>
                     <x-p-td right>{{money($center->shipments_sum_cost)}}</x-p-td>
                     <x-p-td right>
-                        @if($center->is_default)
-                            <button type="button" class="text-yellow-500" disabled>
-                                <x-p::icons.star-full class="w-5 h-5"/>
-                            </button>
+                        @if(!$center->deleted_at)
+                            @include('dhl-ui::costs-center.listing-options.default')
+                            @include('dhl-ui::costs-center.listing-options.edit')
+                            @include('dhl-ui::costs-center.listing-options.delete')
                         @else
-                            <button href="#" wire:click.prevent="setAsDefault({{$center->id}})"
-                                    class="text-slate-500 hover:text-yellow-500 transition-all">
-                                <x-p::icons.star class="w-5 h-5"/>
-                            </button>
+                            @include('dhl-ui::costs-center.listing-options.restore')
                         @endif
-                        <x-p-button
-                            type="button"
-                            size="small"
-                            wire:click="$dispatch('openModal', {component: 'costs-center-edit', arguments: { costCenter: {{$center}} } })"
-                        >
-                            Edit
-                        </x-p-button>
-
-                        <x-p-button
-                            color="danger"
-                            size="small"
-                            wire:click="$dispatch('openModal', {component: 'costs-center-delete', arguments: { costCenter: {{$center}} } })"
-                        >
-                            Delete
-                        </x-p-button>
                     </x-p-td>
                 </x-p-tr>
             @endforeach
         </x-p-tbody>
     </x-p-table>
-    @if($hasHistory)
-        <div class="text-center mt-4">
-            You have historical ({{$hasHistory}}) costs centers.<br/>
-            <x-p-link href="{{route('dhl24.costs-center.history')}}">View deleted costs centers</x-p-link>
-        </div>
-    @endif
-
 </x-p-paper>

@@ -6,11 +6,9 @@ use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
 use xGrz\Dhl24UI\Http\Controllers\LabelController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsController;
-use xGrz\Dhl24UI\Http\Controllers\SettingsCostCentersController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
 use xGrz\Dhl24UI\Http\Controllers\ShipmentsController;
 use xGrz\Dhl24UI\Http\Controllers\SingleShipmentBookingController;
-use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterHistoryListing;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterListing;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
 
@@ -34,12 +32,10 @@ Route::middleware(['web'])
             ->name('settings.')
             ->group(function () {
                 Route::get('/', SettingsController::class)->name('index');
-                Route::get('/costCenters', SettingsCostCentersController::class)->name('costCenters.index');
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
                 Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
         Route::get('costs-center', DHLCostsCenterListing::class)->name('costs-center.index');
-        Route::get('costs-center-history', DHLCostsCenterHistoryListing::class)->name('costs-center.history');
         Route::get('costs-center/{costCenter}', DHLCostsCenterShow::class)->name('costs-center.show')->withTrashed();
     });
 
