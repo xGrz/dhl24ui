@@ -1,14 +1,11 @@
 @php use Carbon\Carbon; @endphp
 <x-p-paper>
+    <x-p-datepicker wire:model.live="from" label="From date" :max="now()"/>
+    <x-p-datepicker wire:model.live="to" label="To date" :min="$from" :max="now()"/>
+
     <x-slot:title>Shipments for <span class="text-white">{{$costCenter->name}}</span></x-slot:title>
 
     <x-p-pagination livewire :source="$costCenter->shipments"></x-p-pagination>
-
-    <div class="text-right">
-        <x-p-datepicker wire:model.live="from" label="From date" :max="now()"/>
-        <x-p-datepicker wire:model.live="to" label="To date" :min="$from" :max="now()"/>
-    </div>
-
 
     <x-p-table>
         <x-p-thead>
