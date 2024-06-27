@@ -3,14 +3,16 @@
 
 use xGrz\Dhl24UI\Http\Controllers\CostController;
 use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
-use xGrz\Dhl24UI\Http\Controllers\LabelController;
+use xGrz\Dhl24UI\Http\Controllers\DHLLabelController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
 use xGrz\Dhl24UI\Http\Controllers\SingleShipmentBookingController;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterListing;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
+use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsCreate;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsListing;
+use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsShow;
 
 Route::middleware(['web'])
     ->prefix('dhl')
@@ -18,7 +20,7 @@ Route::middleware(['web'])
     ->group(function () {
         Route::get('/', fn() => to_route('dhl24.shipments.index')); // redirect only
 
-        Route::get('/shipments/{shipment}/label', LabelController::class)->name('shipments.label');
+
         Route::get('/shipments/{shipment}/cost', CostController::class)->name('shipments.cost');
         Route::name('shipments.booking.')
             ->prefix('shipments/{shipment}')
@@ -27,6 +29,10 @@ Route::middleware(['web'])
 
             });
         Route::get('shipments', DHLShipmentsListing::class)->name('shipments.index');
+        Route::get('shipments/create', DHLShipmentsCreate::class)->name('shipments.create');
+        Route::get('/shipments/{shipment}/label', DHLLabelController::class)->name('shipments.label');
+        Route::get('/shipments/{shipment}', DHLShipmentsShow::class)->name('shipments.show');
+
         //Route::resource('/shipments', ShipmentsController::class);
         Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')

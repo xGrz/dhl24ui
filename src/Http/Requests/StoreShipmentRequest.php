@@ -61,7 +61,7 @@ class StoreShipmentRequest extends FormRequest
             ->toArray();
     }
 
-    public function getRulesForItem()
+    public function getRulesForItem(): array
     {
         $itemRules = [];
         collect($this->rules())

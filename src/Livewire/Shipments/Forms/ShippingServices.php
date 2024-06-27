@@ -1,11 +1,11 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire\Forms;
+namespace xGrz\Dhl24UI\Livewire\Shipments\Forms;
 
 use Livewire\Form;
 use xGrz\Dhl24\Models\DHLContentSuggestion;
 use xGrz\Dhl24\Models\DHLCostCenter;
-use xGrz\Dhl24UI\Helpers\Money;
+use xGrz\Qbp\Helpers\Money;
 
 class ShippingServices extends Form
 {
@@ -56,18 +56,20 @@ class ShippingServices extends Form
             ->toArray();
     }
 
-    public function getCod()
+    public function getCod(): float|int
     {
         return empty($this->cod)
             ? 0
             : Money::from($this->cod)->toNumber();
     }
 
-    public function getValue()
+    public function getValue(): float|int
     {
         return empty($this->cod)
             ? 0
             : Money::from($this->value)->toNumber();
     }
+
+
 
 }

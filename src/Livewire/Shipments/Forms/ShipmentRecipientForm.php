@@ -1,6 +1,6 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire\Forms;
+namespace xGrz\Dhl24UI\Livewire\Shipments\Forms;
 
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -11,7 +11,7 @@ class ShipmentRecipientForm extends Form
     #[Validate]
     public string $name = 'Tester Testowski';
     #[Validate]
-    public string $postalCode = '02777';
+    public string $postalCode = '02-777';
     #[Validate]
     public string $city = 'Warszawa';
     #[Validate]

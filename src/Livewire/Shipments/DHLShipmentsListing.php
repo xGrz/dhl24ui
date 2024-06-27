@@ -31,4 +31,5 @@ class DHLShipmentsListing extends BaseComponent
             ->orderByDesc('number')
             ->paginate();
     }
+
 }

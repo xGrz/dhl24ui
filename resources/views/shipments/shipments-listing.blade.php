@@ -3,7 +3,7 @@
     <x-p-paper>
         <x-slot:title>ShipmentDraft list</x-slot:title>
         <x-slot:actions>
-{{--            <x-p-button href="{{ route('dhl24.shipments.create') }}" color="info">Create</x-p-button>--}}
+            <x-p-button href="{{ route('dhl24.shipments.create') }}" color="info">Create</x-p-button>
             <x-p-button href="{{ route('dhl24.bookings.create') }}" color="warning">Book</x-p-button>
             <x-p-button color="success">Report</x-p-button>
         </x-slot:actions>
@@ -28,9 +28,9 @@
                                 <span class="block text-sm">
                                     {{ $shipment->shipment_date->format('d-m-Y') }}
                                 </span>
-{{--                                <x-p-link href="{{route('dhl24.shipments.show', $shipment->id)}}">--}}
+                                <x-p-link href="{{route('dhl24.shipments.show', $shipment->id)}}">
                                     {{ $shipment->number }}
-{{--                                </x-p-link>--}}
+                                </x-p-link>
                             </x-p-td>
                             <x-p-td>
                                 <x-dhl-ui::shipment-state :status="$shipment->tracking->first()"/>
@@ -58,19 +58,20 @@
                                 @endif
                             </x-p-td>
                             <x-p-td right>
-{{--                                @if (!$shipment->courier_booking_id)--}}
-{{--                                    <x-p-button href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"--}}
-{{--                                                size="small">--}}
-{{--                                        Book--}}
-{{--                                    </x-p-button>--}}
-{{--                                @endif--}}
-{{--                                <x-p-button href="{{ route('dhl24.shipments.label', $shipment->id) }}" size="small">--}}
-{{--                                    Label--}}
-{{--                                </x-p-button>--}}
-{{--                                <x-p-button href="{{ route('dhl24.shipments.destroy', $shipment->id) }}" size="small"--}}
-{{--                                            color="danger">--}}
-{{--                                    Delete--}}
-{{--                                </x-p-button>--}}
+{{--                                                                @if (!$shipment->courier_booking_id)--}}
+{{--                                                                    <x-p-button href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"--}}
+{{--                                                                                size="small">--}}
+{{--                                                                        Book--}}
+{{--                                                                    </x-p-button>--}}
+{{--                                                                @endif--}}
+                                <x-p-button href="{{ route('dhl24.shipments.label', $shipment->id) }}" size="small">
+                                    Label
+                                </x-p-button>
+
+                                {{--                                <x-p-button href="{{ route('dhl24.shipments.destroy', $shipment->id) }}" size="small"--}}
+                                {{--                                            color="danger">--}}
+                                {{--                                    Delete--}}
+                                {{--                                </x-p-button>--}}
                             </x-p-td>
                         </x-p-tr>
                     @endforeach
@@ -81,7 +82,7 @@
                 <x-p-pagination livewire :source="$shipments"/>
             </div>
         @else
-            <x-p-not-found message="Transactions for found."/>
+            <x-p-not-found message="Shipments for found."/>
         @endif
 
     </x-p-paper>

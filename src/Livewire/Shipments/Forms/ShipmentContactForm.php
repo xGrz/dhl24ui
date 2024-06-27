@@ -1,6 +1,6 @@
 <?php
 
-namespace xGrz\Dhl24UI\Livewire\Forms;
+namespace xGrz\Dhl24UI\Livewire\Shipments\Forms;
 
 use Livewire\Attributes\Validate;
 use Livewire\Form;
