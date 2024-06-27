@@ -16,7 +16,7 @@ class DHLShipmentsShow extends BaseComponent
     public function render(): View
     {
         $this->shipment->load(DHLShipment::getRelationsListForDetails());
-        return view('dhl-ui::shipments.shipments-view')
+        return view('dhl-ui::shipments.shipments-show')
             ->extends('p::app')
             ->section('content');
     }
