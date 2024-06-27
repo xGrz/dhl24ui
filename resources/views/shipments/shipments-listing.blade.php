@@ -58,20 +58,18 @@
                                 @endif
                             </x-p-td>
                             <x-p-td right>
-{{--                                                                @if (!$shipment->courier_booking_id)--}}
-{{--                                                                    <x-p-button href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"--}}
-{{--                                                                                size="small">--}}
-{{--                                                                        Book--}}
-{{--                                                                    </x-p-button>--}}
-{{--                                                                @endif--}}
+                                @if (!$shipment->courier_booking_id)
+                                    <x-p-button
+                                        href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"
+                                        size="small"
+                                        color="success"
+                                    >
+                                        Book
+                                    </x-p-button>
+                                @endif
                                 <x-p-button href="{{ route('dhl24.shipments.label', $shipment->id) }}" size="small">
                                     Label
                                 </x-p-button>
-
-                                {{--                                <x-p-button href="{{ route('dhl24.shipments.destroy', $shipment->id) }}" size="small"--}}
-                                {{--                                            color="danger">--}}
-                                {{--                                    Delete--}}
-                                {{--                                </x-p-button>--}}
                             </x-p-td>
                         </x-p-tr>
                     @endforeach
