@@ -151,7 +151,7 @@ class DHLShipmentsCreate extends BaseComponent
             session()->flash('success', 'Shipment created [' . $shipmentId . ']');
             return redirect(route('dhl24.shipments.index'));
         } catch (DHL24Exception $e) {
-            $this->dispatch('openModal', component: 'shipment-create-error', arguments: [
+            $this->dispatch('openModal', component: 'error-modal', arguments: [
                 'title' => 'Shipment create failed',
                 'message' => $e->getMessage()
             ]);

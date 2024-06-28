@@ -71,16 +71,12 @@
                 Info
             </x-slot:title>
             <x-slot:actions>
-{{--                @if (!$shipment->courier_booking_id)--}}
-                    <x-p-button
-                        color="danger"
-                        wire:click="$dispatch('openModal', {component: 'shipment-delete', arguments: { shipment: {{$shipment->id}} } })"
-                    >
-                        Delete
-                    </x-p-button>
-{{--                @else--}}
-{{--                    <x-p-button color="danger" disabled >Delete</x-p-button>--}}
-{{--                @endif--}}
+                <x-p-button
+                    color="danger"
+                    wire:click="$dispatch('openModal', {component: 'shipment-delete', arguments: { shipment: {{$shipment->id}} } })"
+                >
+                    Delete
+                </x-p-button>
             </x-slot:actions>
             <x-p-table size="small">
                 <x-p-tbody>

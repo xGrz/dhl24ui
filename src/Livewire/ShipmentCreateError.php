@@ -17,6 +17,13 @@ class ShipmentCreateError extends ModalComponent
 
     public function render()
     {
-        return view('dhl-ui::shipments.livewire.shipment-create-error');
+        return view('dhl-ui::error.error-modal');
+    }
+
+    public function close(): void
+    {
+        $this
+            ->forceClose()
+            ->closeModal();
     }
 }

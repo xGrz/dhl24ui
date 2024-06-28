@@ -15,7 +15,9 @@ class DHLShipmentDelete extends ModalComponent
 
     public function render(): View
     {
-        return view('dhl-ui::shipments.shipment-delete');
+        return $this->shipment->courier_booking_id
+            ? view('dhl-ui::shipments.shipment-delete-impossible')
+            : view('dhl-ui::shipments.shipment-delete');
     }
 
     public function confirmed()
@@ -25,16 +27,11 @@ class DHLShipmentDelete extends ModalComponent
             session()->flash('success', 'Shipment deleted.');
             $this->redirectRoute('dhl24.shipments.index');
         } catch (DHL24Exception $e) {
-            $this->dispatch('openModal', component: 'shipment-create-error', arguments: [
+            $this->dispatch('openModal', component: 'error-modal', arguments: [
                 'title' => 'Shipment cannot be deleted',
                 'message' => $e->getMessage(),
             ]);
         }
-    }
-
-    public function cancel(): void
-    {
-        $this->closeModal();
     }
 
 

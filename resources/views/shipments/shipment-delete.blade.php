@@ -13,7 +13,7 @@
         {{$shipment->receiver_street}} {{$shipment->receiver_house_number}}
     </div>
     <div class="text-right mt-2">
-        <x-p-button color="success" wire:click="cancel">
+        <x-p-button color="success" wire:click="$dispatch('closeModal')">
             Cancel
         </x-p-button>
         <x-p-button color="danger" wire:click="confirmed">

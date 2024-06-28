@@ -46,7 +46,7 @@ class CreateSingleShipmentBooking extends Component
             session()->flash('success', 'Courier successfully booked for ' . $from->format('d-m-Y') . ' between ' . $from->format('H:i') . '-' . $to->format('H:i'));
             $this->redirectRoute('dhl24.shipments.index');
         } catch (DHL24Exception $e) {
-            $this->dispatch('openModal', component: 'shipment-create-error', arguments: ['title' => 'Courier booking failed', 'message' => $e->getMessage()]);
+            $this->dispatch('openModal', component: 'error-modal', arguments: ['title' => 'Courier booking failed', 'message' => $e->getMessage()]);
         }
     }
 

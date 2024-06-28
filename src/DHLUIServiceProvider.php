@@ -61,7 +61,7 @@ class DHLUIServiceProvider extends ServiceProvider
 
 
         Livewire::component('create-shipment', CreateShipment::class);
-        Livewire::component('shipment-create-error', ShipmentCreateError::class);
+        Livewire::component('error-modal', ShipmentCreateError::class);
         Livewire::component('shipment-listing', ShipmentListing::class);
         Livewire::component('shipment-item', ShipmentListItem::class);
         Livewire::component('shipment-services', ShipmentServices::class);
