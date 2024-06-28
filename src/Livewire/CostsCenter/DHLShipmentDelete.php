@@ -20,7 +20,7 @@ class DHLShipmentDelete extends ModalComponent
             : view('dhl-ui::shipments.shipment-delete');
     }
 
-    public function confirmed()
+    public function confirmed(): void
     {
         try {
             DHL24::deleteShipment($this->shipment);
