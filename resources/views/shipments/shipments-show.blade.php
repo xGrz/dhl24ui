@@ -70,6 +70,18 @@
             <x-slot:title>
                 Info
             </x-slot:title>
+            <x-slot:actions>
+{{--                @if (!$shipment->courier_booking_id)--}}
+                    <x-p-button
+                        color="danger"
+                        wire:click="$dispatch('openModal', {component: 'shipment-delete', arguments: { shipment: {{$shipment->id}} } })"
+                    >
+                        Delete
+                    </x-p-button>
+{{--                @else--}}
+{{--                    <x-p-button color="danger" disabled >Delete</x-p-button>--}}
+{{--                @endif--}}
+            </x-slot:actions>
             <x-p-table size="small">
                 <x-p-tbody>
                     <x-p-tr>
@@ -169,7 +181,8 @@
                     <x-p-tbody>
                         <x-p-tr>
                             <x-p-td>Cost</x-p-td>
-                            <x-p-td right class="font-bold text-white">{{ money($shipment->cost)->currency('zł') }}</x-p-td>
+                            <x-p-td right
+                                    class="font-bold text-white">{{ money($shipment->cost)->currency('zł') }}</x-p-td>
                         </x-p-tr>
                         <x-p-tr>
                             <x-p-td>Payer</x-p-td>

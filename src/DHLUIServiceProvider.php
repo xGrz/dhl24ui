@@ -11,6 +11,7 @@ use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterEdit;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterListing;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterRestore;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
+use xGrz\Dhl24UI\Livewire\CostsCenter\DHLShipmentDelete;
 use xGrz\Dhl24UI\Livewire\CreateMassBooking;
 use xGrz\Dhl24UI\Livewire\CreateShipment;
 use xGrz\Dhl24UI\Livewire\CreateSingleShipmentBooking;
@@ -56,6 +57,7 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('shipments-listing', DHLShipmentsListing::class);
         Livewire::component('shipments-create', DHLShipmentsCreate::class);
         Livewire::component('shipments-show', DHLShipmentsShow::class);
+        Livewire::component('shipment-delete', DHLShipmentDelete::class);
 
 
         Livewire::component('create-shipment', CreateShipment::class);
