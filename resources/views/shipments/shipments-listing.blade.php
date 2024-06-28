@@ -58,7 +58,7 @@
                                 @endif
                             </x-p-td>
                             <x-p-td right>
-                                @if (!$shipment->courier_booking_id)
+                                @if ($shipment->isBookingAvailable())
                                     <x-p-button
                                         href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"
                                         size="small"
