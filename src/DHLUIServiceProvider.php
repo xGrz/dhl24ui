@@ -14,13 +14,13 @@ use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLShipmentDelete;
 use xGrz\Dhl24UI\Livewire\CreateMassBooking;
 use xGrz\Dhl24UI\Livewire\CreateSingleShipmentBooking;
+use xGrz\Dhl24UI\Livewire\DHLErrorModal;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentCreate;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentDelete;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentEdit;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentsListing;
 use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateEdit;
 use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateListing;
-use xGrz\Dhl24UI\Livewire\ShipmentCreateError;
 use xGrz\Dhl24UI\Livewire\ShipmentListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListItem;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsBook;
@@ -62,8 +62,8 @@ class DHLUIServiceProvider extends ServiceProvider
 
 
 
-        Livewire::component('create-shipment', CreateShipment::class);
-        Livewire::component('error-modal', ShipmentCreateError::class);
+        // Livewire::component('create-shipment', CreateShipment::class);
+        Livewire::component('error-modal', DHLErrorModal::class);
         Livewire::component('shipment-listing', ShipmentListing::class);
         Livewire::component('shipment-item', ShipmentListItem::class);
         Livewire::component('shipment-services', ShipmentServices::class);

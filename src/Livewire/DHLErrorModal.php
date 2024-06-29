@@ -4,7 +4,7 @@ namespace xGrz\Dhl24UI\Livewire;
 
 use LivewireUI\Modal\ModalComponent;
 
-class ShipmentCreateError extends ModalComponent
+class DHLErrorModal extends ModalComponent
 {
     public string $message = '';
     public string $title = '';
