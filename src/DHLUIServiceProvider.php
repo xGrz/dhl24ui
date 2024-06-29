@@ -23,6 +23,7 @@ use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateEdit;
 use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListItem;
+use xGrz\Dhl24UI\Livewire\Shipments\DHLDailyReport;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsBook;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsCreate;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsListing;
@@ -59,6 +60,8 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('shipments-show', DHLShipmentsShow::class);
         Livewire::component('shipment-delete', DHLShipmentDelete::class);
         Livewire::component('shipments-book', DHLShipmentsBook::class);
+
+        Livewire::component('daily-report', DHLDailyReport::class);
 
 
 

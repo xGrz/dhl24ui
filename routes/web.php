@@ -4,6 +4,7 @@
 use xGrz\Dhl24UI\Http\Controllers\CostController;
 use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
 use xGrz\Dhl24UI\Http\Controllers\DHLLabelController;
+use xGrz\Dhl24UI\Http\Controllers\DHLReportController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
@@ -33,6 +34,10 @@ Route::middleware(['web'])
         Route::get('/shipments/{shipment}/label', DHLLabelController::class)->name('shipments.label');
         Route::get('/shipments/{shipment}', DHLShipmentsShow::class)->name('shipments.show');
 
+        Route::get('report/{date}/{type}', DHLReportController::class)->name('report')
+            ->where('date', '[0-9]{2}-[0-9]{2}-[0-9]{4}');
+
+
         //Route::resource('/shipments', ShipmentsController::class);
         Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')
@@ -40,7 +45,7 @@ Route::middleware(['web'])
             ->group(function () {
                 Route::get('/', SettingsController::class)->name('index');
                 Route::get('/contents', SettingsContentsController::class)->name('contents.index');
-                Route::get('/tracking-states',SettingsTrackingStatesController::class)->name('tracking-states.index');
+                Route::get('/tracking-states', SettingsTrackingStatesController::class)->name('tracking-states.index');
             });
 
         Route::get('costs-center', DHLCostsCenterListing::class)->name('costs-center.index');

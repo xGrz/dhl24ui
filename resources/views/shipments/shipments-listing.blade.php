@@ -5,7 +5,12 @@
         <x-slot:actions>
             <x-p-button href="{{ route('dhl24.shipments.create') }}" color="info">Create</x-p-button>
             <x-p-button href="{{ route('dhl24.bookings.create') }}" color="warning">Book</x-p-button>
-            <x-p-button color="success">Report</x-p-button>
+            <x-p-button
+                wire:click="$dispatch('openModal', { component: 'daily-report'} )"
+                color="success"
+            >
+                Report
+            </x-p-button>
         </x-slot:actions>
         @if($shipments)
             <x-p-table>
