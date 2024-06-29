@@ -60,7 +60,7 @@
                             <x-p-td right>
                                 @if ($shipment->isBookingAvailable())
                                     <x-p-button
-                                        href="{{ route('dhl24.shipments.booking.create', $shipment->id) }}"
+                                        wire:click="$dispatch('openModal', { component: 'shipments-book', arguments: { shipment: '{{$shipment->id}}' }}) "
                                         size="small"
                                         color="success"
                                     >

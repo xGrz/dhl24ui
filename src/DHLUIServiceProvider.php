@@ -13,7 +13,6 @@ use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterRestore;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLShipmentDelete;
 use xGrz\Dhl24UI\Livewire\CreateMassBooking;
-use xGrz\Dhl24UI\Livewire\CreateShipment;
 use xGrz\Dhl24UI\Livewire\CreateSingleShipmentBooking;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentCreate;
 use xGrz\Dhl24UI\Livewire\Settings\Contents\ContentDelete;
@@ -24,6 +23,7 @@ use xGrz\Dhl24UI\Livewire\Settings\TrackingStates\TrackingStateListing;
 use xGrz\Dhl24UI\Livewire\ShipmentCreateError;
 use xGrz\Dhl24UI\Livewire\ShipmentListing;
 use xGrz\Dhl24UI\Livewire\ShipmentListItem;
+use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsBook;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsCreate;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsListing;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsShow;
@@ -58,6 +58,8 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('shipments-create', DHLShipmentsCreate::class);
         Livewire::component('shipments-show', DHLShipmentsShow::class);
         Livewire::component('shipment-delete', DHLShipmentDelete::class);
+        Livewire::component('shipments-book', DHLShipmentsBook::class);
+
 
 
         Livewire::component('create-shipment', CreateShipment::class);
