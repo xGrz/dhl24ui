@@ -1,7 +1,7 @@
 <div>
     <x-p-pagination livewire :source="$bookings"/>
     <x-p-paper class="bg-slate-800">
-        <x-slot:title>Item list</x-slot:title>
+        <x-slot:title>Bookings listing</x-slot:title>
         <x-slot:actions>
             <x-p-button color="success" href="{{ route('dhl24.bookings.create') }}">New courier booking</x-p-button>
         </x-slot:actions>

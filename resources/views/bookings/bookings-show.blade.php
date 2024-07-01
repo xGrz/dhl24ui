@@ -47,6 +47,11 @@
         </x-p-table>
     </x-p-paper>
     <div class="mt-4 text-right">
-        <x-p-button color="danger">Cancel booking</x-p-button>
+        <x-p-button
+            color="danger"
+            wire:click="$dispatch('openModal', { component: 'cancel-booking-modal', arguments: { booking: {{$booking->id}} } })"
+        >
+            Cancel booking
+        </x-p-button>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace xGrz\Dhl24UI;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsCreate;
 use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsListing;
 use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsShow;
 use xGrz\Dhl24UI\Livewire\Bookings\DHLCancelBookingModal;
@@ -69,6 +70,7 @@ class DHLUIServiceProvider extends ServiceProvider
 
         Livewire::component('bookings-listing', DHLBookingsListing::class);
         Livewire::component('bookings-show', DHLBookingsShow::class);
+        Livewire::component('bookings-create', DHLBookingsCreate::class);
         Livewire::component('cancel-booking-modal', DHLCancelBookingModal::class);
 
 
