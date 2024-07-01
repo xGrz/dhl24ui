@@ -5,6 +5,9 @@ namespace xGrz\Dhl24UI;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsListing;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsShow;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLCancelBookingModal;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterCreate;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterDelete;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterEdit;
@@ -62,6 +65,11 @@ class DHLUIServiceProvider extends ServiceProvider
         Livewire::component('shipments-book', DHLShipmentsBook::class);
 
         Livewire::component('daily-report', DHLDailyReport::class);
+
+
+        Livewire::component('bookings-listing', DHLBookingsListing::class);
+        Livewire::component('bookings-show', DHLBookingsShow::class);
+        Livewire::component('cancel-booking-modal', DHLCancelBookingModal::class);
 
 
 

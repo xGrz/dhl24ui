@@ -2,13 +2,15 @@
 
 
 use xGrz\Dhl24UI\Http\Controllers\CostController;
-use xGrz\Dhl24UI\Http\Controllers\CourierBookingsController;
 use xGrz\Dhl24UI\Http\Controllers\DHLLabelController;
 use xGrz\Dhl24UI\Http\Controllers\DHLReportController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsContentsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsController;
 use xGrz\Dhl24UI\Http\Controllers\SettingsTrackingStatesController;
 use xGrz\Dhl24UI\Http\Controllers\SingleShipmentBookingController;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsCreate;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsListing;
+use xGrz\Dhl24UI\Livewire\Bookings\DHLBookingsShow;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterListing;
 use xGrz\Dhl24UI\Livewire\CostsCenter\DHLCostsCenterShow;
 use xGrz\Dhl24UI\Livewire\Shipments\DHLShipmentsCreate;
@@ -37,9 +39,12 @@ Route::middleware(['web'])
         Route::get('report/{date}/{type}', DHLReportController::class)->name('report')
             ->where('date', '[0-9]{2}-[0-9]{2}-[0-9]{4}');
 
+        Route::get('bookings', DHLBookingsListing::class)->name('bookings.index');
+        Route::get('bookings/create', DHLBookingsCreate::class)->name('bookings.create');
+        Route::get('bookings/{booking}', DHLBookingsShow::class)->name('bookings.show');
 
         //Route::resource('/shipments', ShipmentsController::class);
-        Route::resource('/bookings', CourierBookingsController::class);
+        //Route::resource('/bookings', CourierBookingsController::class);
         Route::prefix('settings')
             ->name('settings.')
             ->group(function () {

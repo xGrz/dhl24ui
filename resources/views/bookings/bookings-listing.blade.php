@@ -1,7 +1,5 @@
-@extends('p::app')
-
-@section('content')
-    <x-p-pagination :source="$bookings"/>
+<div>
+    <x-p-pagination livewire :source="$bookings"/>
     <x-p-paper class="bg-slate-800">
         <x-slot:title>Item list</x-slot:title>
         <x-slot:actions>
@@ -56,5 +54,5 @@
         @endif
 
     </x-p-paper>
-    <x-p-pagination :source="$bookings"/>
-@endsection
+    <x-p-pagination livewire :source="$bookings"/>
+</div>
